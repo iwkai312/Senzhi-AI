@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>森智 AI 開発ガイド｜API・飛書多維表格・ComfyUI</title><meta name="description" content="商品管理表の1行から白背景の画像を作り、完成したファイルを同じSKUに登録する手順です。画像やテキストを書き戻すには、モデルの取得、生成の依頼、結果の照会の3つの操作を組み合わせます。"><link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html">
+<link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html">
+<link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html">
+<link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html">
+<link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html">
+<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"><meta property="og:type" content="article"><meta property="og:title" content="森智 AI 開発ガイド｜API・飛書多維表格・ComfyUI"><meta property="og:description" content="商品管理表の1行から白背景の画像を作り、完成したファイルを同じSKUに登録する手順です。画像やテキストを書き戻すには、モデルの取得、生成の依頼、結果の照会の3つの操作を組み合わせます。"><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/api-ja.html"><meta property="og:image" content="https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"><link rel="icon" href="assets/senzhi-logo.png"><link rel="stylesheet" href="assets/guide.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"森智 AI 開発ガイド｜API・飛書多維表格・ComfyUI","inLanguage":"ja","url":"https://iwkai312.github.io/Senzhi-AI/api-ja.html","description":"商品管理表の1行から白背景の画像を作り、完成したファイルを同じSKUに登録する手順です。画像やテキストを書き戻すには、モデルの取得、生成の依頼、結果の照会の3つの操作を組み合わせます。","publisher":{"@type":"Organization","name":"森智 AI · Senzhi AI","url":"https://www.senzhiai.com/"}}</script></head>
+<body><header><div class="shell mast"><a class="brand" href="https://www.senzhiai.com/"><img src="assets/senzhi-logo.png" width="32" height="32" alt="">森智 AI <span>/</span> Senzhi AI</a><nav class="languages" aria-label="言語を選択"><a lang="zh-Hans" hreflang="zh-Hans" href="api-zh.html">简体中文</a><a lang="en" hreflang="en" href="api-en.html">English</a><a lang="ja" hreflang="ja" href="api-ja.html" aria-current="page">日本語</a><a lang="ko" hreflang="ko" href="api-ko.html">한국어</a><a lang="es" hreflang="es" href="api-es.html">Español</a></nav></div></header>
+<main><div class="shell"><div class="hero api-hero"><div class="hero-copy"><div class="kind"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg>開発者ガイド</div><h1><span class="term">森智 AI</span> 開発ガイド｜API・飛書多維表格・<span class="term">ComfyUI</span></h1><p>商品管理表の1行から白背景の画像を作り、完成したファイルを同じSKUに登録する手順です。画像やテキストを書き戻すには、モデルの取得、生成の依頼、結果の照会の3つの操作を組み合わせます。</p><div class="actions"><a class="primary" href="https://www.senzhiai.com/workspace.php?tool=open_api">API キーを取得 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="secondary" href="ja.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5c3.3-1.4 6.5-1.1 9 1.1 2.5-2.2 5.7-2.5 9-1.1v13.1c-3.2-1.3-6.3-.9-9 1.1-2.7-2-5.8-2.4-9-1.1zM12 6.6v13"/></svg>製品ガイド</a></div></div></div>
+<div class="layout"><aside><div class="toc"><strong><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>目次</strong><a href="#section-1">1. このアカウントで使えるモデルを調べる</a><a href="#section-2">2. 商品画像を1枚依頼する</a><a href="#section-3">3. 元の依頼を照会して原本を保存する</a><a href="#section-4">画像・テキスト・動画の設定</a><a href="#section-5">飛書多維表格（Feishu Base）へ結果を書き戻す</a><a href="#section-6">ComfyUIで商品制作のノードを組む</a></div><details><summary>目次</summary><a href="#section-1">1. このアカウントで使えるモデルを調べる</a><a href="#section-2">2. 商品画像を1枚依頼する</a><a href="#section-3">3. 元の依頼を照会して原本を保存する</a><a href="#section-4">画像・テキスト・動画の設定</a><a href="#section-5">飛書多維表格（Feishu Base）へ結果を書き戻す</a><a href="#section-6">ComfyUIで商品制作のノードを組む</a></details></aside><article><section class="chapter" id="section-1"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg></span>1. このアカウントで使えるモデルを調べる</h2><p>ワークスペースにログインし、API画面でキーを作成します。次の例はBashとcurlを使い、サーバーに設定した環境変数 <code>SENZHI_API_KEY</code> からキーを読み取ります。リクエストの認証には <code>Authorization: Bearer &lt;key&gt;</code> または <code>X-API-Key</code> ヘッダーを使用します。</p>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  &#39;https://www.senzhiai.com/api/open_models.php?type=image&#39;
+</code></pre>
+<p><code>type</code> には <code>image</code>、<code>text</code>、<code>video</code> を指定でき、省略すると全件を取得します。モデル一覧の照会は無料です。<code>models</code> 配列から目的のモデルを探し、<code>pricing</code> と <code>request_example</code> を確認してください。<code>model_id</code> には <code>db:123</code> のような森智の識別子を指定します。表示名で選ぶ場合は代わりに <code>model_name</code> を使い、大文字・小文字も一覧とそろえます。同名のモデルで <code>409 AMBIGUOUS_MODEL</code> が返った場合は識別子を指定してください。</p>
+</section>
+<section class="chapter" id="section-2"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>2. 商品画像を1枚依頼する</h2><p>次のJSONを <code>request.json</code> として保存し、サンプルのURLを商品画像のURLに置き換えます。画像は森智 AI が読み取れるHTTPSの直リンクを用意してください。<code>images</code> の順番が指示文の「画像1」「画像2」に対応します。モデルを変更する際は、取得した <code>request_example</code> に合わせて必須項目も調整します。</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;nano-banana-pro&quot;,
+  &quot;prompt&quot;: &quot;画像1の生成り色のカーディガンを正面から撮った白背景の商品画像を作成してください。襟、ボタン、袖口のリブを保ってください。&quot;,
+  &quot;images&quot;: [
+    &quot;https://example.com/products/knit-01.jpg&quot;
+  ],
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-white-v1&quot;
+}
+</code></pre>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  -H &#39;Content-Type: application/json&#39; \
+  --data-binary @request.json \
+  &#39;https://www.senzhiai.com/api/open_generate.php&#39;
+</code></pre>
+<p>1件の依頼に対して <code>n</code> は1です。応答例 <code>{&quot;success&quot;:true,&quot;request_id&quot;:&quot;req_example&quot;,&quot;status&quot;:&quot;queued&quot;}</code> の <code>request_id</code> をSKUにひも付けて保存します。新しい依頼には新しい <code>idempotency_key</code> を設定してください。応答が届く前に通信が切れた場合は、同じAPIキー、同じ <code>idempotency_key</code>、同じリクエスト本文で再送し、受理済みの依頼を取得します。</p>
+</section>
+<section class="chapter" id="section-3"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span>3. 元の依頼を照会して原本を保存する</h2><p><code>req_example</code> を受け取ったIDに置き換え、送信時のAPIキーで照会します。</p>
+<pre><code class="language-bash">curl --silent --show-error --get \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  --data-urlencode &#39;request_id=req_example&#39; \
+  &#39;https://www.senzhiai.com/api/open_result.php&#39;
+</code></pre>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>JSONの <code>status</code></th>
+<th>次の操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code> / <code>queued</code> / <code>processing</code></td>
+<td>5～10秒後に再照会します。<code>Retry-After</code> または <code>retry_after</code> を受け取ったら、その待ち時間に従います。</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>画像・動画は <code>result.url</code>、テキストは <code>result.content</code> を取得します。署名付きURLはクエリ文字列を含めてそのまま使い、原本を早めに保存します。</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td><code>error.code</code> と <code>error.message</code> を記録し、原因を確認します。</td>
+</tr>
+</tbody></table></div>
+<p>照会のタイムアウトや <code>503 MEDIA_UNAVAILABLE</code> が発生したら、受け取った元のIDで照会を続けます。<code>410 MEDIA_EXPIRED</code> は保存期間が過ぎたことを示します。ファイルのダウンロード先には <code>result.url</code> だけを渡し、森智のAPIキーは森智のAPIドメインへのリクエストにだけ付けます。</p>
+</section>
+<section class="chapter" id="section-4"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4zm0 0v10l9 4 9-4V7M12 11v10"/></svg></span>画像・テキスト・動画の設定</h2><ul>
+<li><strong>画像</strong>は <code>parameter_combinations</code> と <code>parameters</code> を調べ、希望する解像度・縦横比・品質・形式を組み合わせます。4Kは対応する設定で選べます。</li>
+<li><strong>テキスト</strong>は <code>prompt</code> に商品の事実、対象言語、文字数を書きます。文体は <code>system_prompt</code> で指定できます。参考画像を添える場合は、そのモデルの対応と枚数を確認してください。</li>
+<li><strong>動画</strong>はアカウントの <code>type=video</code> にモデルが掲載されたときに使えます。2026年11月6日に確認したAPI一覧の動画欄は空で、MiniMax H3とAgnes Video 2.5はWeb版で利用できました。APIから使う際は <code>video_capabilities</code> で尺・画質・参照画像を確認し、例にある <code>options.pricing_version</code> を保持します。料金は選んだ解像度の毎秒単価と秒数で決まります。</li>
+</ul>
+<h3>海外向け商品ページの特長を英語で書く</h3>
+<p>次の本文を <code>request.json</code> に保存し、商品画像の例と同じPOSTと照会コマンドを使います。新しい依頼には専用の <code>idempotency_key</code> を設定し、同じ依頼を再送するときは元の値を使ってください。状態が <code>success</code> になったら、<code>result.content</code> から英文を取得します。</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;gpt-6.1-sol&quot;,
+  &quot;prompt&quot;: &quot;商品ページに載せる英語の説明を20語以内で1文書いてください。確認済みの事実は、クリーム色のニットカーディガンで、前にボタンが4つあることです。この情報のみを使ってください。&quot;,
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-copy-en-v1&quot;
+}
+</code></pre>
+<h3>APIモデル名一覧（2026年11月6日確認）</h3>
+<p><code>model_name</code> には大文字・小文字、空白、括弧を含めて下記の表記をそのまま使います。送信前に自分のアカウントの最新一覧を確認してください。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>種類</th>
+<th>一覧の表示名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>画像</td>
+<td><code>nano-banana-pro</code> · <code>nano-banana-pro-vip（谷歌官方）</code> · <code>Nano Banana Pro【VIP】</code></td>
+</tr>
+<tr>
+<td>画像</td>
+<td><code>nano-banana-2</code> · <code>nano-banana-2.1</code> · <code>Nano-banana-2.1【VIP】</code></td>
+</tr>
+<tr>
+<td>画像</td>
+<td><code>GPT-image-2.5-sunburst【VIP】</code> · <code>GPT-image-2.5-flare【VIP】</code> · <code>GPT Image 2.0【VIP】</code></td>
+</tr>
+<tr>
+<td>テキスト</td>
+<td><code>gpt-6.1-sol</code> · <code>gemini-3.8-flash</code> · <code>gemini3.1-flash</code></td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="chapter" id="section-5"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>飛書多維表格（Feishu Base）へ結果を書き戻す</h2><ol>
+<li>SKU、制作指示、画像URL、版番号、モデル、状態、タスクID、結果の列を作ります。飛書へのログインを求める添付URLは、権限を持つサービスから取得した、生成に必要な有効期間の直リンクに置き換えてください。</li>
+<li>承認済みでタスクIDが空の行を対象に、「发送 HTTP 请求」（HTTPリクエストの送信）から上記のPOSTを送ります。行ID・用途・版番号を組み合わせた固定の <code>idempotency_key</code> を使い、応答の <code>request_id</code> を同じ行に保存します。APIキーはアクセスを制限した自動化の設定か、自社のサーバー側に保管します。</li>
+<li>別の定期処理で未完了の行を抽出し、GETの <code>request_id</code> パラメーターに行内のIDを設定します。完了時に <code>result.url</code> か <code>result.content</code> を書き戻します。長期保管には原本を素材庫にコピーします。</li>
+</ol>
+</section>
+<section class="chapter" id="section-6"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>ComfyUIで商品制作のノードを組む</h2><p>ワークスペースのAPI画面からプラグインをダウンロードし、<code>ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/</code> の直下に <code>requirements.txt</code> がある形で展開します。ComfyUIを実行するPython環境で依存パッケージをインストールし、ComfyUIを再起動してブラウザーを更新します。「森智AI」または「NewAPI」を検索し、設定ノードに接続情報を入力すると、画像・テキスト・テキストプレビューのノードを使えます。共有前にはAPIキーを削除し、書き出したJSONも確認してください。<a href="https://www.senzhiai.com/workspace.php?tool=open_api">プラグインとインストール手順</a></p>
+</section></article></div></div></main>
+<footer><div class="shell"><a href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/docs/api-ja.md">GitHub で読む ↗</a></div></footer></body></html>

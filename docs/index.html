@@ -1,39 +1,106 @@
 <!doctype html>
 <html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图</title><meta name="description" content="森智 AI 是面向电商卖家、品牌美工和内容团队的 AI 视觉创作工作台。">
-<link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/">
-<link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/">
+<title>森智 AI 电商商品图与批量生图指南</title><meta name="description" content="森智 AI 为电商和跨境电商团队制作商品视觉素材。一张针织衫平铺图，可以用来准备白底主图、模特试穿图、领口特写和不同市场的场景图。手里有一整个上新文件夹时，可以先核对每款商品和模特的配对，再一次提交整批任务。"><link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/"><link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/">
 <link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html">
 <link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html">
 <link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/ko.html">
 <link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html">
-<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/">
-<meta property="og:type" content="article"><meta property="og:title" content="森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图"><meta property="og:description" content="森智 AI 是面向电商卖家、品牌美工和内容团队的 AI 视觉创作工作台。"><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/">
-<style>
-:root{color-scheme:light;--ink:#18283f;--muted:#52647b;--accent:#1659a3;--line:#d7e0eb}
-*{box-sizing:border-box}body{margin:0;background:#fafbfd;color:var(--ink);font:normal 1.06rem/1.76 system-ui,-apple-system,"Segoe UI",sans-serif;overflow-wrap:anywhere}
-header,footer{background:white}.wrap{width:min(100% - 2.5rem,50rem);margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 0}header{border-bottom:1px solid var(--line)}
-.brand{font-weight:750;color:var(--ink);font-size:1.14rem;text-decoration:none}nav{display:flex;flex-wrap:wrap;gap:.25rem}nav a{color:var(--muted);padding:.3rem .6rem;border-radius:.4rem;font-size:.9rem;text-decoration:none}nav a[aria-current=page]{background:#e0edff;color:#164e8e;font-weight:650}nav a:hover{background:#ecf2fa;color:var(--ink)}
-a{color:var(--accent);text-underline-offset:.19em}a:focus-visible{outline:3px solid #ed8e32;outline-offset:2px}a:hover{color:#103d70}main{padding:clamp(2.1rem,5vw,4.4rem) 0 3rem}h1,h2,h3{line-height:1.24;text-wrap:balance}h1{font-size:clamp(2rem,4.3vw,3.45rem);letter-spacing:-.032em;margin:0 0 1.2rem}h2{font-size:clamp(1.45rem,3vw,1.9rem);margin:2.25rem 0 .75rem}p{margin:.75rem 0 1.05rem}h1+p{font-size:1.12rem}ul,ol{padding-inline-start:1.6rem}li{margin:.5rem 0}code{font-size:.92em;background:#e8eff8;padding:.06em .28em;border-radius:.25rem}footer{border-top:1px solid var(--line);padding:1.25rem 0;font-size:.93rem}footer a{color:var(--muted)}@media(max-width:640px){.wrap{width:calc(100% - 2rem)}.top{gap:.45rem}.top nav{margin-inline-start:-.6rem}main{padding-top:1.8rem}}
-</style></head>
-<body><header><div class="wrap top"><a class="brand" href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><nav aria-label="选择语言"><a lang="zh-Hans" hreflang="zh-Hans" href="index.html" aria-current="page">简体中文</a><a lang="en" hreflang="en" href="en.html">English</a><a lang="ja" hreflang="ja" href="ja.html">日本語</a><a lang="ko" hreflang="ko" href="ko.html">한국어</a><a lang="es" hreflang="es" href="es.html">Español</a></nav></div></header>
-<main class="wrap"><h1>森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图</h1>
-<p>森智 AI 是面向电商卖家、品牌美工和内容团队的 AI 视觉创作工作台。手里有商品白底图和模特参考图，就可以先看看一件衣服穿在不同模特身上的效果，再挑选适合商品页的图。上新款式多时，还可以把整批素材配对，一次提交多个任务。</p>
-<p><a href="https://www.senzhiai.com/">访问森智 AI 官网</a> · <a href="https://www.senzhiai.com/workspace.php">进入工作台</a></p>
-<h2>从商品素材到上架图片</h2>
-<ul>
-<li><strong>服装虚拟试穿与商品替换</strong>。上传商品图和参考图，在提示词里指定要换哪件衣服，以及要保留的姿势、背景或构图。生成后可放大检查领口、纹理和花色，再决定采用哪一张。</li>
-<li><strong>白底图、细节图与场景图</strong>。为同一款产品准备不同用途的图片。白底图用于展示商品外形，细节图突出袖口或面料，生活场景图展示搭配与使用情境。</li>
-<li><strong>详情页与图文内容</strong>。选用参考版式制作商品详情图，也可以围绕同一款商品继续创作小红书图文或生成视频素材。</li>
-</ul>
-<h2>实例：3 款针织衫，分别搭配 10 张模特图</h2>
-<ol>
-<li>在工作台打开「批量生图」，选择支持至少两张参考图的模型。将 3 张商品图放在第一列，10 张模特图放在第二列。</li>
-<li>选择「全部组合」，预览会列出 <strong>3 × 10 = 30 组</strong>。如果已经按拍摄清单做好了一一配对，选择按顺序配对即可。如果每组都要用同一张背景图，可在模型允许的参考图数量内添加固定图片列。</li>
-<li>写一段共用要求，例如「把图 1 的针织衫换到图 2 的模特身上，保留模特姿势和背景，注意领口与袖口的花纹」。需要分别照顾每组素材时，可开启「逐组自动优化提示词」。</li>
-<li>核对组数和预计积分后提交。生成完成后，可以在批次里挑选结果，也可以到「资产中心 → 图片空间」按功能筛选，勾选需要的原图打包下载。</li>
+<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"><meta property="og:type" content="article"><meta property="og:title" content="森智 AI 电商商品图与批量生图指南"><meta property="og:description" content="森智 AI 为电商和跨境电商团队制作商品视觉素材。一张针织衫平铺图，可以用来准备白底主图、模特试穿图、领口特写和不同市场的场景图。手里有一整个上新文件夹时，可以先核对每款商品和模特的配对，再一次提交整批任务。"><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/"><meta property="og:image" content="https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"><link rel="icon" href="assets/senzhi-logo.png"><link rel="stylesheet" href="assets/guide.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"森智 AI 电商商品图与批量生图指南","inLanguage":"zh-Hans","url":"https://iwkai312.github.io/Senzhi-AI/","description":"森智 AI 为电商和跨境电商团队制作商品视觉素材。一张针织衫平铺图，可以用来准备白底主图、模特试穿图、领口特写和不同市场的场景图。手里有一整个上新文件夹时，可以先核对每款商品和模特的配对，再一次提交整批任务。","publisher":{"@type":"Organization","name":"森智 AI · Senzhi AI","url":"https://www.senzhiai.com/"},"image":"https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"}</script></head>
+<body><header><div class="shell mast"><a class="brand" href="https://www.senzhiai.com/"><img src="assets/senzhi-logo.png" width="32" height="32" alt="">森智 AI <span>/</span> Senzhi AI</a><nav class="languages" aria-label="选择语言"><a lang="zh-Hans" hreflang="zh-Hans" href="index.html" aria-current="page">简体中文</a><a lang="en" hreflang="en" href="en.html">English</a><a lang="ja" hreflang="ja" href="ja.html">日本語</a><a lang="ko" hreflang="ko" href="ko.html">한국어</a><a lang="es" hreflang="es" href="es.html">Español</a></nav></div></header>
+<main><div class="shell"><div class="hero"><div class="hero-copy"><div class="kind"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5c3.3-1.4 6.5-1.1 9 1.1 2.5-2.2 5.7-2.5 9-1.1v13.1c-3.2-1.3-6.3-.9-9 1.1-2.7-2-5.8-2.4-9-1.1zM12 6.6v13"/></svg>产品指南</div><h1><span class="term">森智 AI</span> <span class="term">电商商品图</span>与<span class="term">批量生图</span>指南</h1><p>森智 AI 为电商和跨境电商团队制作商品视觉素材。一张针织衫平铺图，可以用来准备白底主图、模特试穿图、领口特写和不同市场的场景图。手里有一整个上新文件夹时，可以先核对每款商品和模特的配对，再一次提交整批任务。</p><div class="actions"><a class="primary" href="https://www.senzhiai.com/workspace.php">进入工作台 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="secondary" href="api-zh.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg>开发者指南</a></div></div><figure><img src="assets/knit-studio.webp" alt="AI 制作的上新流程示意：同一款红色开衫的平铺、模特上身和针织纹理" width="1536" height="1024" fetchpriority="high"><figcaption>流程配图 · AI 制作</figcaption></figure></div>
+<div class="layout"><aside><div class="toc"><strong><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>阅读目录</strong><a href="#section-1">为一个 SKU 准备整套商品图</a><a href="#section-2">排详情页、做社媒和视频</a><a href="#section-3">批量生图：3 款针织衫 × 10 张模特图</a><a href="#section-4">模型、4K 与原图交付</a><a href="#section-5">交付与任务追踪</a><a href="#section-6">API、飞书多维表格与 ComfyUI</a></div><details><summary>阅读目录</summary><a href="#section-1">为一个 SKU 准备整套商品图</a><a href="#section-2">排详情页、做社媒和视频</a><a href="#section-3">批量生图：3 款针织衫 × 10 张模特图</a><a href="#section-4">模型、4K 与原图交付</a><a href="#section-5">交付与任务追踪</a><a href="#section-6">API、飞书多维表格与 ComfyUI</a></details></aside><article><section class="chapter" id="section-1"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3-6 4 2.7 4L7 9.7V21h10V9.7l2.3 1.3L22 7l-6-4c-.8 2.8-7.2 2.8-8 0z"/></svg></span>为一个 SKU 准备整套商品图</h2><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>工作台功能</th>
+<th>准备什么</th>
+<th>适合拿来做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AI 替换（1 拖多）</td>
+<td>一张产品图，多张模特或场景参考图</td>
+<td>看同一件衣服在不同模特身上的效果，或把同款产品放进多个场景。可以在提示词里指定保留姿势、光线和背景。</td>
+</tr>
+<tr>
+<td>AI 替换（1 托 1）</td>
+<td>一一对应的商品图和参考图</td>
+<td>拍摄清单已经配好对时，分别处理每款 SKU，避免把 A 款的服装换到 B 款的参考图里。</td>
+</tr>
+<tr>
+<td>商品买家秀</td>
+<td>商品图，加上使用场景或人群描述</td>
+<td>制作生活化的场景素材，例如通勤穿搭、周末出游或家居陈列。用于广告或社媒时，应标明 AI 创作，和真实买家评价区分。</td>
+</tr>
+<tr>
+<td>白底图生成</td>
+<td>一张能看清轮廓、颜色的商品图</td>
+<td>把杂乱背景换成干净的商品展示背景。上架前按目标平台规范复核阴影、构图和主体占比。</td>
+</tr>
+<tr>
+<td>细节图生成</td>
+<td>产品图，最好另有实拍细节参考</td>
+<td>围绕编织纹理、缝线、纽扣或包袋五金补充细节视角。涉及成分、结构和功能时，以实物为准。</td>
+</tr>
+<tr>
+<td>图文生图（垫图定制）</td>
+<td>参考图，加上想保留和改变的部分</td>
+<td>同一款商品按不同市场换背景、季节或陈列方式，适合为独立站、货架和广告分别准备素材。</td>
+</tr>
+<tr>
+<td>纯文字生图</td>
+<td>对主体、视角、光线、色调的描述</td>
+<td>还在策划拍摄时，先比较棚拍、居家或户外的视觉方向。定稿时再用实物参考校正。</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="chapter" id="section-2"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg></span>排详情页、做社媒和视频</h2><p><strong>详情页套版</strong>适合已有成熟版式的店铺。把参考版式和新商品素材放入工作台，按需要生成同风格图片。<strong>详情页制作</strong>则提供画布，方便自己决定图片顺序、编辑版式并导出。比如给一款开衫排详情页，可以从模特全身图开始，接领口、袖口细节，再放自己的尺码表。</p>
+<p><strong>小红书内容创作</strong>可以围绕一款商品准备图文选题、配图与文案草稿。给英语市场做素材时，也可以在提示词里写清受众、语言和使用场景，再由运营核对译文、单位和商品卖点。</p>
+<p><strong>视频生成</strong>适合把静态参考图转成短片，例如让镜头从针织衫全身缓慢推进到领口。先选视频模型，再按该模型支持的时长、分辨率和参考图上限提交；这些参数会影响报价。</p>
+</section>
+<section class="chapter" id="section-3"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>批量生图：3 款针织衫 × 10 张模特图</h2><ol>
+<li>打开「批量生图」，选择能接收至少两张参考图的模型。第一列放三款针织衫，第二列放十张模特图。支持选文件夹、多选图片、粘贴、拖入，也能调整列顺序。<strong>从左到右就是提示词里的图 1、图 2。</strong></li>
+<li><strong>全部组合</strong>会生成 30 个任务组，每组是一款衣服和一张模特图。如果搭配表已经逐行排好，就用<strong>按顺序配对</strong>。要让每组都带同一个品牌背景，就再加一列<strong>固定图片</strong>；按顺序配对时，多张固定图会按顺序循环。</li>
+<li>写下共用要求，例如「把图 1 的开衫穿到图 2 的模特身上，保留原姿势、领口织纹和纽扣颜色」。开启<strong>逐组优化</strong>后，每组会结合自己的参考图优化提示词。只需严格执行同一句要求时，也可以直接用原稿。</li>
+<li>在预览里抽查首组、末组和中间一组，核对列顺序、是否缺图、组数和预计积分。可立即开始或预约执行。<strong>等整批素材上传并确认后再关电脑</strong>；已确认的预约批次会在后台先做已开启的优化，到预约时间再生图。</li>
+<li>在批次里看每组进度。可选备用模型处理明确失败的任务，单组失败后可按界面提示重试。遇到提交结果暂未同步，先查询原任务，避免为同一张图重复下单。</li>
 </ol>
-<h2>开发者接入</h2>
-<p>在工作台的「API 接口调用」中创建 API Key，使用 <code>GET /api/open_models.php</code> 查询当前账号可调用的模型、参数和计费信息。接入支持图片、文字和视频三类任务，可选模型以账号返回的列表为准。提交任务时可以使用本站模型编号或完整展示名称。</p>
-<p>第一次使用可以先以访客身份浏览工作台，看看配图方式与创作工具。登录后即可提交任务，提交前可在页面核对预计积分。<a href="https://www.senzhiai.com/workspace.php">打开工作台</a></p>
-</main><footer><div class="wrap"><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/README.md">在 GitHub 阅读原文</a></div></footer></body></html>
+<p>一个模型如果最多支持 10 张参考图，5 列 × 100 行就是 <strong>100 个任务，每个任务 5 张图</strong>。挑模型看的是每组的列数；核对整批成本看的是有效组数、分辨率和优化选项。<a href="https://www.senzhiai.com/workspace.php?tool=folder_batch">打开批量生图</a></p>
+</section>
+<section class="chapter" id="section-4"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg></span>模型、4K 与原图交付</h2><div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>模型示例</th>
+<th>怎么选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>商品图、换装、场景变体</td>
+<td><code>nano-banana-pro</code>、<code>nano-banana-2</code>、<code>nano-banana-2.1</code>，以及 GPT Image 2.5 Sunburst / Flare 的 VIP 版本</td>
+<td>同一款商品先试一组，放大比较领口纹理、纽扣位置和背景保持情况，再决定用哪个模型跑整批。</td>
+</tr>
+<tr>
+<td>提示词与文字</td>
+<td><code>gpt-6.1-sol</code>、<code>gemini-3.8-flash</code>；API 另有 <code>gemini3.1-flash</code></td>
+<td>用产品资料写文案，或给批量任务逐组优化提示词。工作台按具体功能列出可选模型。</td>
+</tr>
+<tr>
+<td>视频</td>
+<td>MiniMax H3、Agnes Video 2.5</td>
+<td>H3 支持最多 9 张参考图、最高 1080p；Agnes 支持最多 5 张、最高 2K。按任务需要选择。</td>
+</tr>
+</tbody></table></div>
+<p><strong>4K 交付按模型能力来。</strong> 选择支持 4K 的图片模型和 4K 档位，森智按这个档位请求生成，下载交付模型返回的原图。森智不把低分辨率结果在平台端超分放大后当作 4K 原图交付。列表缩略图用于浏览，验图请点「下载原图」，在文件属性里核对像素，再放大检查织纹、印花和小字。画幅比例不同，宽高也不同。</p>
+<p>模型可用性、参考图上限和积分随账号、场景及档位变化。2026 年 11 月 6 日核对时，开放 API 目录有 9 个图片展示项和 3 个文字模型。上述两款视频模型可在网页使用；API 目录开放视频模型后，调用方可沿用同一套提交和查询流程。接入时请以自己的实时目录为准。</p>
+</section>
+<section class="chapter" id="section-5"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4zm0 0v10l9 4 9-4V7M12 11v10"/></svg></span>交付与任务追踪</h2><p>截至 2026 年 11 月 6 日，已有<strong>超过 40 个非管理员账号</strong>在森智完成过生成任务，按账号去重。日常上新时，美工可以在「资产中心 → 图片空间」按功能筛选，运营只勾选要上架的几张，或将整批原图打包成 ZIP。生成图片请在 <strong>5 天内</strong>下载并自行备份；把选定的成片按 SKU 存入团队自己的素材库，方便下次换市场或改版时复用。</p>
+<p>批次会保留各组的进度、结果和失败状态。上传并确认后，关闭工作台也能继续后台处理。需要客服协助时，从任务记录反馈并附任务编号，便于核对具体的一组。对每天都要交图的团队，这些机制让中途断网、部分失败或交接班后的工作都可以接着做。</p>
+</section>
+<section class="chapter" id="section-6"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>API、飞书多维表格与 ComfyUI</h2><ul>
+<li><strong>接 ERP、独立站或自有商品库。</strong> 用 API 查可调用模型和参数，再用 SKU 的素材与提示词提交，把响应中的 <code>request_id</code> 存回商品记录，完成后保存结果。适合按商品目录驱动工作。<a href="api-zh.html">阅读中文 API 调用指南</a></li>
+<li><strong>飞书多维表格。</strong> 一行放一款商品，建「SKU、图片地址、提示词、请求编号、状态、成片」等字段。用自动化的「发送 HTTP 请求」提交，把 <code>request_id</code> 写入请求编号，再用它查询并回填结果。密钥放在受控的请求配置里，给森智的素材 URL 需在任务处理期间可读取。</li>
+<li><strong>ComfyUI。</strong> 工作台提供 Bridge 插件下载和安装说明，可用图片、文本、文本预览和配置节点，把商品图或提示词接入现有工作流。比如先用文字节点整理要求，再让图片节点生成变体，继续用你常用的保存节点输出。<a href="https://www.senzhiai.com/workspace.php?tool=open_api">打开插件与 API 工作台</a></li>
+</ul>
+<p>第一次用可以先以访客身份浏览工作台。准备好一款商品、两张参考图，登录后做一个小批次，检查原图和积分，再扩大到整批上新。<a href="https://www.senzhiai.com/workspace.php">进入森智 AI</a></p>
+</section></article></div></div></main>
+<footer><div class="shell"><a href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/README.md">GitHub 原文 ↗</a></div></footer></body></html>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>https://iwkai312.github.io/Senzhi-AI/</loc>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/</loc>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html"/>
@@ -9,8 +8,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"/>
   </url>
-  <url>
-    <loc>https://iwkai312.github.io/Senzhi-AI/en.html</loc>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/api-zh.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+  </url>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/en.html</loc>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html"/>
@@ -18,8 +24,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"/>
   </url>
-  <url>
-    <loc>https://iwkai312.github.io/Senzhi-AI/ja.html</loc>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/api-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+  </url>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/ja.html</loc>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html"/>
@@ -27,8 +40,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"/>
   </url>
-  <url>
-    <loc>https://iwkai312.github.io/Senzhi-AI/ko.html</loc>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/api-ja.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+  </url>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/ko.html</loc>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html"/>
@@ -36,13 +56,28 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"/>
   </url>
-  <url>
-    <loc>https://iwkai312.github.io/Senzhi-AI/es.html</loc>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/api-ko.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+  </url>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/es.html</loc>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/en.html"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/ja.html"/>
     <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/ko.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/es.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/"/>
+  </url>
+  <url><loc>https://iwkai312.github.io/Senzhi-AI/api-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"/>
   </url>
 </urlset>

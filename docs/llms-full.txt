@@ -1,112 +1,822 @@
 # Senzhi AI (森智 AI)
 
-## [简体中文 — 森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图](https://iwkai312.github.io/Senzhi-AI/)
+## [简体中文 · 森智 AI 电商商品图与批量生图指南](https://iwkai312.github.io/Senzhi-AI/)
 
-森智 AI 是面向电商卖家、品牌美工和内容团队的 AI 视觉创作工作台。手里有商品白底图和模特参考图，就可以先看看一件衣服穿在不同模特身上的效果，再挑选适合商品页的图。上新款式多时，还可以把整批素材配对，一次提交多个任务。
+森智 AI 为电商和跨境电商团队制作商品视觉素材。一张针织衫平铺图，可以用来准备白底主图、模特试穿图、领口特写和不同市场的场景图。手里有一整个上新文件夹时，可以先核对每款商品和模特的配对，再一次提交整批任务。
 
-[访问森智 AI 官网](https://www.senzhiai.com/) · [进入工作台](https://www.senzhiai.com/workspace.php)
+[进入工作台](https://www.senzhiai.com/workspace.php) · [API 调用文档](https://iwkai312.github.io/Senzhi-AI/api-zh.html) · [多语言网页版](https://iwkai312.github.io/Senzhi-AI/) · [森智 AI 官网](https://www.senzhiai.com/)
 
-### 从商品素材到上架图片
+## 🧵 为一个 SKU 准备整套商品图
 
-- **服装虚拟试穿与商品替换**。上传商品图和参考图，在提示词里指定要换哪件衣服，以及要保留的姿势、背景或构图。生成后可放大检查领口、纹理和花色，再决定采用哪一张。
-- **白底图、细节图与场景图**。为同一款产品准备不同用途的图片。白底图用于展示商品外形，细节图突出袖口或面料，生活场景图展示搭配与使用情境。
-- **详情页与图文内容**。选用参考版式制作商品详情图，也可以围绕同一款商品继续创作小红书图文或生成视频素材。
+| 工作台功能 | 准备什么 | 适合拿来做什么 |
+| --- | --- | --- |
+| AI 替换（1 拖多） | 一张产品图，多张模特或场景参考图 | 看同一件衣服在不同模特身上的效果，或把同款产品放进多个场景。可以在提示词里指定保留姿势、光线和背景。 |
+| AI 替换（1 托 1） | 一一对应的商品图和参考图 | 拍摄清单已经配好对时，分别处理每款 SKU，避免把 A 款的服装换到 B 款的参考图里。 |
+| 商品买家秀 | 商品图，加上使用场景或人群描述 | 制作生活化的场景素材，例如通勤穿搭、周末出游或家居陈列。用于广告或社媒时，应标明 AI 创作，和真实买家评价区分。 |
+| 白底图生成 | 一张能看清轮廓、颜色的商品图 | 把杂乱背景换成干净的商品展示背景。上架前按目标平台规范复核阴影、构图和主体占比。 |
+| 细节图生成 | 产品图，最好另有实拍细节参考 | 围绕编织纹理、缝线、纽扣或包袋五金补充细节视角。涉及成分、结构和功能时，以实物为准。 |
+| 图文生图（垫图定制） | 参考图，加上想保留和改变的部分 | 同一款商品按不同市场换背景、季节或陈列方式，适合为独立站、货架和广告分别准备素材。 |
+| 纯文字生图 | 对主体、视角、光线、色调的描述 | 还在策划拍摄时，先比较棚拍、居家或户外的视觉方向。定稿时再用实物参考校正。 |
 
-### 实例：3 款针织衫，分别搭配 10 张模特图
+## 🖼️ 排详情页、做社媒和视频
 
-1. 在工作台打开「批量生图」，选择支持至少两张参考图的模型。将 3 张商品图放在第一列，10 张模特图放在第二列。
-2. 选择「全部组合」，预览会列出 **3 × 10 = 30 组**。如果已经按拍摄清单做好了一一配对，选择按顺序配对即可。如果每组都要用同一张背景图，可在模型允许的参考图数量内添加固定图片列。
-3. 写一段共用要求，例如「把图 1 的针织衫换到图 2 的模特身上，保留模特姿势和背景，注意领口与袖口的花纹」。需要分别照顾每组素材时，可开启「逐组自动优化提示词」。
-4. 核对组数和预计积分后提交。生成完成后，可以在批次里挑选结果，也可以到「资产中心 → 图片空间」按功能筛选，勾选需要的原图打包下载。
+**详情页套版**适合已有成熟版式的店铺。把参考版式和新商品素材放入工作台，按需要生成同风格图片。**详情页制作**则提供画布，方便自己决定图片顺序、编辑版式并导出。比如给一款开衫排详情页，可以从模特全身图开始，接领口、袖口细节，再放自己的尺码表。
 
-### 开发者接入
+**小红书内容创作**可以围绕一款商品准备图文选题、配图与文案草稿。给英语市场做素材时，也可以在提示词里写清受众、语言和使用场景，再由运营核对译文、单位和商品卖点。
 
-在工作台的「API 接口调用」中创建 API Key，使用 `GET /api/open_models.php` 查询当前账号可调用的模型、参数和计费信息。接入支持图片、文字和视频三类任务，可选模型以账号返回的列表为准。提交任务时可以使用本站模型编号或完整展示名称。
+**视频生成**适合把静态参考图转成短片，例如让镜头从针织衫全身缓慢推进到领口。先选视频模型，再按该模型支持的时长、分辨率和参考图上限提交；这些参数会影响报价。
 
-第一次使用可以先以访客身份浏览工作台，看看配图方式与创作工具。登录后即可提交任务，提交前可在页面核对预计积分。[打开工作台](https://www.senzhiai.com/workspace.php)
+## 🧩 批量生图：3 款针织衫 × 10 张模特图
 
----
+1. 打开「批量生图」，选择能接收至少两张参考图的模型。第一列放三款针织衫，第二列放十张模特图。支持选文件夹、多选图片、粘贴、拖入，也能调整列顺序。**从左到右就是提示词里的图 1、图 2。**
+2. **全部组合**会生成 30 个任务组，每组是一款衣服和一张模特图。如果搭配表已经逐行排好，就用**按顺序配对**。要让每组都带同一个品牌背景，就再加一列**固定图片**；按顺序配对时，多张固定图会按顺序循环。
+3. 写下共用要求，例如「把图 1 的开衫穿到图 2 的模特身上，保留原姿势、领口织纹和纽扣颜色」。开启**逐组优化**后，每组会结合自己的参考图优化提示词。只需严格执行同一句要求时，也可以直接用原稿。
+4. 在预览里抽查首组、末组和中间一组，核对列顺序、是否缺图、组数和预计积分。可立即开始或预约执行。**等整批素材上传并确认后再关电脑**；已确认的预约批次会在后台先做已开启的优化，到预约时间再生图。
+5. 在批次里看每组进度。可选备用模型处理明确失败的任务，单组失败后可按界面提示重试。遇到提交结果暂未同步，先查询原任务，避免为同一张图重复下单。
 
-## [English — Senzhi AI (森智 AI) for e-commerce product photography](https://iwkai312.github.io/Senzhi-AI/en.html)
+一个模型如果最多支持 10 张参考图，5 列 × 100 行就是 **100 个任务，每个任务 5 张图**。挑模型看的是每组的列数；核对整批成本看的是有效组数、分辨率和优化选项。[打开批量生图](https://www.senzhiai.com/workspace.php?tool=folder_batch)
 
-Senzhi AI is a workspace for creating product images from your own photos. A clothing store can start with a flat-lay photo of a cardigan, preview it on different models with virtual try-on, and prepare images for a product listing. For other products, use a reference photo to replace an item in a scene, create a white-background image, or draw attention to details such as a clasp or a stitched seam.
+## 🔍 模型、4K 与原图交付
 
-### Turn a folder of photos into a batch
+| 用途 | 模型示例 | 怎么选 |
+| --- | --- | --- |
+| 商品图、换装、场景变体 | `nano-banana-pro`、`nano-banana-2`、`nano-banana-2.1`，以及 GPT Image 2.5 Sunburst / Flare 的 VIP 版本 | 同一款商品先试一组，放大比较领口纹理、纽扣位置和背景保持情况，再决定用哪个模型跑整批。 |
+| 提示词与文字 | `gpt-6.1-sol`、`gemini-3.8-flash`；API 另有 `gemini3.1-flash` | 用产品资料写文案，或给批量任务逐组优化提示词。工作台按具体功能列出可选模型。 |
+| 视频 | MiniMax H3、Agnes Video 2.5 | H3 支持最多 9 张参考图、最高 1080p；Agnes 支持最多 5 张、最高 2K。按任务需要选择。 |
 
-Suppose you want to see three cardigans on two models. Put the three garment photos in one source column and the two model photos in another. Choose **All combinations** to create six groups, one for each garment and model pairing. Preview the groups before submitting. A shared prompt such as “Dress the model in image 2 in the cardigan from image 1 and keep the pose” tells the tool how to use each photo.
+**4K 交付按模型能力来。** 选择支持 4K 的图片模型和 4K 档位，森智按这个档位请求生成，下载交付模型返回的原图。森智不把低分辨率结果在平台端超分放大后当作 4K 原图交付。列表缩略图用于浏览，验图请点「下载原图」，在文件属性里核对像素，再放大检查织纹、印花和小字。画幅比例不同，宽高也不同。
 
-For a shoot where each garment already has an assigned model photo, choose **Pair in order**. Arrange both columns so the photos on each row belong together. To use the same reference in every group, add it as a fixed image. In this mode, several fixed images rotate through the groups. You can also enable prompt optimization to adapt the shared instruction to the references in each group.
+模型可用性、参考图上限和积分随账号、场景及档位变化。2026 年 11 月 6 日核对时，开放 API 目录有 9 个图片展示项和 3 个文字模型。上述两款视频模型可在网页使用；API 目录开放视频模型后，调用方可沿用同一套提交和查询流程。接入时请以自己的实时目录为准。
 
-### Review, download, or integrate
+## 📦 交付与任务追踪
 
-Open the image library to review recent results, select the shots you want, and download the originals together as a ZIP file.
+截至 2026 年 11 月 6 日，已有**超过 40 个非管理员账号**在森智完成过生成任务，按账号去重。日常上新时，美工可以在「资产中心 → 图片空间」按功能筛选，运营只勾选要上架的几张，或将整批原图打包成 ZIP。生成图片请在 **5 天内**下载并自行备份；把选定的成片按 SKU 存入团队自己的素材库，方便下次换市场或改版时复用。
 
-For an integration, the API supports image, text, and video tasks. Use your account’s model list to see which models you can call and which parameters each accepts.
+批次会保留各组的进度、结果和失败状态。上传并确认后，关闭工作台也能继续后台处理。需要客服协助时，从任务记录反馈并附任务编号，便于核对具体的一组。对每天都要交图的团队，这些机制让中途断网、部分失败或交接班后的工作都可以接着做。
 
-Guests can browse the workspace. Sign in to submit a task and check its estimated credit cost. [Visit Senzhi AI](https://www.senzhiai.com/) · [Open the workspace](https://www.senzhiai.com/workspace.php)
+## 🔌 API、飞书多维表格与 ComfyUI
 
----
+- **接 ERP、独立站或自有商品库。** 用 API 查可调用模型和参数，再用 SKU 的素材与提示词提交，把响应中的 `request_id` 存回商品记录，完成后保存结果。适合按商品目录驱动工作。[阅读中文 API 调用指南](https://iwkai312.github.io/Senzhi-AI/api-zh.html)
+- **飞书多维表格。** 一行放一款商品，建「SKU、图片地址、提示词、请求编号、状态、成片」等字段。用自动化的「发送 HTTP 请求」提交，把 `request_id` 写入请求编号，再用它查询并回填结果。密钥放在受控的请求配置里，给森智的素材 URL 需在任务处理期间可读取。
+- **ComfyUI。** 工作台提供 Bridge 插件下载和安装说明，可用图片、文本、文本预览和配置节点，把商品图或提示词接入现有工作流。比如先用文字节点整理要求，再让图片节点生成变体，继续用你常用的保存节点输出。[打开插件与 API 工作台](https://www.senzhiai.com/workspace.php?tool=open_api)
 
-## [日本語 — 森智 AI (Senzhi AI)｜EC向けの商品画像・着用イメージ制作](https://iwkai312.github.io/Senzhi-AI/ja.html)
-
-森智 AI は、ネットショップの商品担当者や制作チームが、手元の商品写真をもとに白背景の商品画像、ディテールカット、モデルの着用イメージを作れるサービスです。同じ商品を複数のモデルや背景で見比べたいときは、写真の組み合わせをまとめて指定できます。[公式サイト](https://www.senzhiai.com/)
-
-### 新作ニットの着用イメージを作る
-
-1. ワークスペースで「批量生图」（画像の一括生成）を開きます。素材の1列目にニット3点の商品写真、2列目にモデル10人の写真を並べます。
-2. 「全部组合」（すべての組み合わせ）を選ぶと、ニット1点につき10人、合計30組ができます。共通の指示には、たとえば「画像1のニットを画像2の人物に着せ、襟と編み目の特徴を保つ」と入力します。必要に応じて「逐组自动优化提示词」を有効にすると、各組の写真に合わせて指示文を調整できます。
-3. 組み合わせと見積もりポイントを確認して生成を開始します。できあがった画像を実物の写真と見比べ、色や柄が意図どおりに表現されたカットを選びます。
-
-商品ごとにモデルが決まっている場合は、「按顺序配对」（順番に組み合わせる）を選びます。各列の1枚目同士、2枚目同士がそれぞれ1組になります。同じ背景をすべての組に使うには、「固定图片」（固定画像）の列に背景を1枚入れます。順番に組み合わせるモードで固定画像を複数入れると、並び順に繰り返し使われます。
-
-### 商品ページへの活用
-
-- **着用イメージと商品差し替え**：商品写真と参考写真を組み合わせて、服の着用例や商品を入れ替えた構図を試せます。
-- **白背景とディテール**：商品一覧には白背景の画像を、詳細ページには袖口の編み目やボタンに焦点を当てたカットを用意できます。
-- **ダウンロード**：「图片空间」（画像スペース）から元のサイズの画像を保存できます。複数のカットを選んで ZIP にまとめることもできます。
-- **API連携**：自社ツールから画像・テキスト・動画の生成を呼び出せます。利用できるモデルと指定可能なパラメーターは、アカウントの API キーで取得したモデル一覧で確認できます。
-
-ゲストでもワークスペースを閲覧できます。生成する際はログインし、使うモデルと必要なポイントを確認してください。[ワークスペースを開く](https://www.senzhiai.com/workspace.php)
+第一次用可以先以访客身份浏览工作台。准备好一款商品、两张参考图，登录后做一个小批次，检查原图和积分，再扩大到整批上新。[进入森智 AI](https://www.senzhiai.com/workspace.php)
 
 ---
 
-## [한국어 — 森智 AI (Senzhi AI) | 온라인 쇼핑몰을 위한 AI 상품 이미지 제작](https://iwkai312.github.io/Senzhi-AI/ko.html)
+## [简体中文 · 森智 AI 开发指南｜API、飞书多维表格与 ComfyUI](https://iwkai312.github.io/Senzhi-AI/api-zh.html)
 
-森智 AI는 쇼핑몰 판매자와 콘텐츠 제작팀이 상품 사진으로 흰 배경 이미지, 디테일 컷, 가상 착용 이미지를 만들 수 있는 서비스입니다. 신상품 하나를 여러 모델이나 배경에 적용해 보고 싶다면 사진을 폴더별로 준비한 뒤 작업 공간에서 한꺼번에 조합할 수 있습니다. [공식 사이트](https://www.senzhiai.com/)
+把上新清单变成一组可追踪的任务。用一行 SKU 的参考图生成白底商品图，再用文字模型把已核实的商品资料写成英文卖点。两项任务各有独立的请求编号，成图和文案都能写回对应的商品记录。
 
-### 니트 3종으로 착용 이미지 30장 만들기
+[进入工作台管理 API Key](https://www.senzhiai.com/workspace.php?tool=open_api) · [English guide](https://iwkai312.github.io/Senzhi-AI/api-en.html) · [产品与批量生图介绍](https://iwkai312.github.io/Senzhi-AI/)
 
-1. 작업 공간에서 ‘批量生图’(이미지 일괄 생성)를 엽니다. 첫 번째 열에는 니트 상품 사진 3장을, 두 번째 열에는 모델 사진 10장을 넣습니다.
-2. ‘全部组合’(모든 조합)을 선택하면 니트 한 벌에 모델 10명씩, 총 30개 조합이 만들어집니다. 공통 프롬프트에 “2번 사진의 모델에게 1번 사진의 니트를 입히고, 옷깃 형태와 짜임을 살려 주세요”처럼 원하는 결과를 적습니다. 조합별로 지시문을 다듬으려면 ‘逐组自动优化提示词’(조합별 프롬프트 최적화)를 켭니다.
-3. 사진 조합과 예상 포인트를 확인한 뒤 생성을 시작합니다. 완성된 착용 예시를 원본 상품 사진과 비교해 색상과 무늬가 잘 표현된 컷을 고릅니다.
+## 三个接口跑通一次生成
 
-상품마다 사용할 모델이 정해져 있으면 ‘按顺序配对’(순서대로 짝짓기)를 선택하세요. 각 열의 첫 번째 사진끼리, 두 번째 사진끼리 한 조가 됩니다. 모든 조에 같은 배경을 쓰려면 ‘固定图片’(고정 이미지) 열에 배경 사진 한 장을 넣으세요. 순서대로 짝짓기에서 고정 이미지를 여러 장 넣으면 등록한 순서대로 돌아가며 사용합니다.
+正式站地址为 `https://www.senzhiai.com`。登录工作台，从「API 接口调用」创建密钥。在自己的服务端通过 `Authorization: Bearer <密钥>` 鉴权，也可以用 `X-API-Key`。下面的终端命令使用 Bash 和 curl，从环境变量 `SENZHI_API_KEY` 读取密钥。
 
-### 상품 페이지에 활용하는 방법
+| 步骤 | 方法和路径 | 需要保存什么 |
+| --- | --- | --- |
+| 选模型 | `GET /api/open_models.php` | 模型标识、参数、报价和请求示例 |
+| 建任务 | `POST /api/open_generate.php` | 本次任务返回的 `request_id` |
+| 取结果 | `GET /api/open_result.php?request_id=...` | 图片、视频的原文件地址，或文字正文 |
 
-- **가상 착용과 상품 교체** — 상품 사진과 참고 사진을 함께 사용해 모델 착용 예시를 만들거나, 기존 구도에 다른 상품을 배치해 볼 수 있습니다.
-- **흰 배경 이미지와 디테일 컷** — 상품 목록에는 흰 배경 이미지를, 상세 페이지에는 소매의 짜임이나 단추처럼 고객이 살펴볼 부분을 강조한 컷을 사용할 수 있습니다.
-- **원본 다운로드** — ‘图片空间’(이미지 보관함)에서 원본 크기로 내려받을 수 있습니다. 원하는 컷만 고르거나 필터링한 결과를 모두 선택해 ZIP 파일로 받을 수도 있습니다.
-- **API 연동** — 자체 도구에서 이미지, 텍스트, 동영상 생성 기능을 호출할 수 있습니다. 계정에서 사용할 수 있는 모델과 입력 옵션은 해당 계정의 API 키로 모델 목록을 조회해 확인하세요.
+### 1. 获取账号可用的模型
 
-작업 공간은 게스트로 둘러볼 수 있습니다. 생성을 시작하려면 로그인한 뒤 모델과 필요한 포인트를 확인하세요. [작업 공간 열기](https://www.senzhiai.com/workspace.php)
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  'https://www.senzhiai.com/api/open_models.php?type=image'
+```
+
+`type` 可选 `image`、`text` 或 `video`，省略会列出全部类型。读取目录免费。找到 `models` 数组中的目标模型，查看 `pricing` 并复制 `request_example`。示例中的 `model_id` 是本站编号，如 `db:123`。也可改用单独的 `model_name`，完整匹配目录的展示名称和大小写。如收到 `409 AMBIGUOUS_MODEL`，请改用目标模型的编号。
+
+### 2. 提交一张商品白底图
+
+把 JSON 保存为 `request.json`。下面用按名称调用的 `nano-banana-pro` 举例。先在账号目录确认该模型可用，将示例图片地址换成自己的地址。如果改用其他模型，请从它的 `request_example` 复制必填选项。参考图应是森智可以访问的 HTTPS 图片直链。`images` 的先后顺序对应提示词中的图 1、图 2。
+
+```json
+{
+  "model_name": "nano-banana-pro",
+  "prompt": "为图 1 的米色针织衫制作正面白底商品图，保留领口、纽扣和袖口纹理。",
+  "images": ["https://example.com/products/knit-01.jpg"],
+  "idempotency_key": "catalog-knit-01-white-v1"
+}
+```
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json \
+  'https://www.senzhiai.com/api/open_generate.php'
+```
+
+每次请求创建一个任务，参数 `n` 为 1。保存返回的 `request_id`。例如 `{"success":true,"request_id":"req_example","status":"queued"}` 中，`queued` 代表已入队。每个新任务使用新的 `idempotency_key`。若提交途中断线且未收到编号，用**原密钥、原标识和相同请求内容**重试，找回已受理的任务。
+
+### 3. 查询原任务并保存结果
+
+```bash
+curl --silent --show-error --get \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  --data-urlencode 'request_id=req_example' \
+  'https://www.senzhiai.com/api/open_result.php'
+```
+
+将 `req_example` 换成上一步的编号，使用提交时的同一把密钥。读取 JSON 中的 `status` 决定下一步。
+
+| 任务状态 | 处理方式 |
+| --- | --- |
+| `pending`、`queued`、`processing` | 等待 5～10 秒再查。收到 `Retry-After` 或 `retry_after` 时按指定时间等待。 |
+| `success` | 图片和视频读取 `result.url`，及时下载原文件。文字读取 `result.content`。 |
+| `failed` | 保存 `error.code` 和 `error.message`，确认原因后决定是否发起新任务。 |
+
+下载时，将响应里的完整 `result.url`（保留查询参数）赋给 `RESULT_URL`。例如，选择 PNG 输出时可运行 `curl --fail --location --proto '=https' --proto-redir '=https' --output knit-01.png "$RESULT_URL"`。临时文件链接自带访问凭证，下载时仅发送该链接，API Key 只发送到森智 API 域名。
+
+拿到编号后，即使查询超时或返回 `503 MEDIA_UNAVAILABLE`，也继续查原任务。若返回 `410 MEDIA_EXPIRED`，表示该结果已过保存期限。
+
+## 图片、文字和视频分别怎么填
+
+2026 年 11 月 6 日核对时，正式站普通和 VIP 账号的 API 目录均列出图片和文字模型。网页视频工作台另有 MiniMax H3 和 Agnes Video 2.5。API 已支持视频任务协议，只有调用方的 `type=video` 目录列出模型后才可提交视频；本次核对的账号目录中视频列表为空。
+
+| 用途 | 请求中需要关注的字段 |
+| --- | --- |
+| 图片 · 为同一件商品做主图和细节图 | 查看 `parameter_combinations` 和 `parameters`，按模型选 `options.resolution`、`aspect_ratio`、`quality`、`format`。需要 4K 时先确认所选组合提供该档位。 |
+| 文字 · 从商品资料生成多语卖点 | 用 `prompt` 写目标语言、字数和商品事实，可加 `system_prompt` 约束语气。带图时先核对模型是否接受图片及张数上限。 |
+| 视频 · 为商品详情页制作竖版短片 | 从视频模型的 `request_example` 开始，用 `video_capabilities` 核对时长、分辨率、比例及参考图。保留 `options.pricing_version`，按当前分辨率的每秒报价乘时长估算积分。价格版本变化时重新取目录并确认报价。 |
+
+### 为独立站生成一条英文卖点
+
+将下面的 JSON 另存为 `request.json`，使用与图片示例相同的 POST 和查询方法。把幂等标识换成本次新任务专用的值，同一次任务重试时保留它。状态为 `success` 后，从 `result.content` 读取英文正文。
+
+```json
+{
+  "model_name": "gpt-6.1-sol",
+  "prompt": "请用英语写一条不超过 20 个词的商品卖点。已核实的事实：米色针织开衫，前襟有四颗纽扣。只使用这些事实。",
+  "idempotency_key": "catalog-knit-01-copy-en-v1"
+}
+```
+
+### 可调用模型展示名（2026 年 11 月 6 日）
+
+下面保留了目录里的大小写、空格和括号，可复制到 `model_name`。上线前请再查自己账号的实时目录。
+
+| 类别 | 正式目录展示名 |
+| --- | --- |
+| 图片 | `nano-banana-pro` · `nano-banana-pro-vip（谷歌官方）` · `Nano Banana Pro【VIP】` |
+| 图片 | `nano-banana-2` · `nano-banana-2.1` · `Nano-banana-2.1【VIP】` |
+| 图片 | `GPT-image-2.5-sunburst【VIP】` · `GPT-image-2.5-flare【VIP】` · `GPT Image 2.0【VIP】` |
+| 文字 | `gpt-6.1-sol` · `gemini-3.8-flash` · `gemini3.1-flash` |
+
+## 飞书多维表格｜从上新清单发起任务
+
+假设表里有一款针织衫，运营同事只需选中「待生成」即可交给流程处理。用飞书多维表格自动化的「发送 HTTP 请求」连接森智。以下是可自行搭建的字段和流程。[飞书 HTTP 请求说明](https://www.feishu.cn/hc/zh-CN/articles/410063847664)
+
+1. **建字段。** 添加 SKU、版本、参考图直链、提示词、模型编号、状态、请求编号和结果链接。商品附件若需要登录飞书，先由有权限的服务取得森智能读取的临时直链，留足生成所需的有效期。
+2. **提交并回写。** 当状态变为「待生成」且请求编号为空时，发送上面的 POST。用记录 ID、任务用途和版本拼成稳定的 `idempotency_key`。在受限的自动化配置或自己的服务端配置密钥，响应体选择 JSON，回写 `request_id`，状态改为「处理中」。
+3. **单独查询。** 另一个定时流程只处理有编号的未完成行。请求 URL 填 `https://www.senzhiai.com/api/open_result.php`，在飞书的「查询参数」里把 `request_id` 映射到该行编号。成功后回写 `result.url` 或 `result.content`，失败后记录原因。要长期留档，可把下载的原文件存入团队素材库，再把归档地址写回该行。
+
+## ComfyUI｜把商品图接入节点工作流
+
+森智工作台「API 接口调用」页面提供 **ComfyUI 插件** 下载和安装指引。已有商品图工作流时，可以把文字节点输出的拍摄要求送给图片节点，再预览或保存生成结果。[获取插件与安装说明](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+1. 解压插件，让插件目录位于 `ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/`，目录内可见 `requirements.txt`。
+2. 在运行 ComfyUI 的 Python 环境里安装依赖。例如，在包含 `ComfyUI/` 的目录执行 `python -m pip install -r ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/requirements.txt`。
+3. 重启 ComfyUI 并刷新浏览器，在画布上搜索「森智AI」或「NewAPI」。用配置节点填写森智服务和 API Key，选择账号可用的模型，再连接图片模型接口、文本模型接口或文本预览节点。分享工作流前清除密钥并检查导出的 JSON。
 
 ---
 
-## [Español — Senzhi AI (森智 AI) para fotografía de producto y comercio electrónico](https://iwkai312.github.io/Senzhi-AI/es.html)
+## [English · Senzhi AI (森智 AI) for e-commerce product photography, virtual try-on and batch generation](https://iwkai312.github.io/Senzhi-AI/en.html)
 
-Senzhi AI permite a las tiendas y a sus equipos creativos preparar imágenes de catálogo a partir de sus propias fotos. Con el probador virtual puedes ver cómo quedaría una chaqueta de punto en distintas fotos de modelos. También puedes sustituir el producto que aparece en una escena, crear una imagen con fondo blanco o preparar un primer plano de un detalle como un cierre o una costura.
+Senzhi AI helps e-commerce and cross-border retail teams turn product photos into listing images, virtual try-on shots and short videos. Take a cardigan launch. A flat lay can supply the product reference for a clean catalog shot, a photo on a model or a campaign set in a different market. If you have a whole season of samples, you can check the pairings as a batch before sending them to production.
 
-### Crea las variantes de una colección
+[Explore the workspace](https://www.senzhiai.com/workspace.php) · [Read the API guide](https://iwkai312.github.io/Senzhi-AI/api-en.html) · [Senzhi AI website](https://www.senzhiai.com/)
 
-Imagina que tienes fotos de tres chaquetas y de dos modelos. Añade las prendas a la primera columna y las fotos de las modelos a la segunda. Con **Todas las combinaciones** obtendrás seis grupos, uno por cada pareja de prenda y modelo. Revisa la vista previa y escribe una instrucción común, por ejemplo «Viste a la modelo de la imagen 2 con la chaqueta de la imagen 1 y conserva la pose».
+## 🧵 Build the image set for one SKU
 
-Si ya has elegido una foto de modelo para cada prenda, usa el **emparejamiento por orden**. Ajusta el orden hasta que cada fila contenga las dos fotos que quieras combinar. También puedes añadir una imagen fija que se repita en todo el lote, por ejemplo la referencia de un mismo fondo. En este modo, si añades varias imágenes fijas a la misma columna, se alternarán siguiendo su orden. La optimización opcional de instrucciones adapta el texto común a las imágenes de cada grupo.
+| Workspace tool | What to bring | What to make |
+| --- | --- | --- |
+| Virtual try-on and product replacement, one to many | One garment or product shot, plus several model or scene references | Show one item on different models or in different settings. Tell the model which pose, lighting and background to keep. |
+| Product replacement, one to one | A list of product shots with a matching reference for each | Follow a prepared shot list. For example, pair the cream cardigan with its front view and the navy one with its side view. |
+| Lifestyle imagery | A product photo and a description of the intended setting | Place a tote on a café table or style a jacket for a commute. Label AI styling shots when presenting them alongside genuine customer photos. |
+| White-background images | A clear view of the product outline and color | Make a clean image for a marketplace listing. Check the crop, subject size and shadow against the destination store’s requirements. |
+| Product details | A product shot and close-up reference photos where possible | Show a cuff, a button, a closure or the texture of a knit. Compare details with the physical sample before publishing. |
+| Image-guided generation | A reference image and instructions on what to retain or change | Keep the product and composition while adapting the background, season or styling for a new market. |
+| Text-to-image | A description of the subject, composition, lighting and mood | Compare concepts for a campaign before a shoot. Bring product references into the next round when the result must match a real SKU. |
 
-### Descarga las imágenes o conecta tu aplicación
+## 🖼️ Make product pages, social posts and short videos
 
-En la biblioteca de imágenes puedes revisar los resultados recientes, marcar las tomas que quieras usar y descargar los originales en un archivo ZIP.
+Use **detail-page templates** when a store already has a visual style. Supply a layout reference and the new product photos to generate material in that style. Use the **detail-page canvas** to arrange the finished images yourself. For a cardigan, you might lead with the full-length look, follow with the collar and cuff, and end with the size chart you maintain for that market.
 
-La API admite tareas de imagen, texto y vídeo. Consulta la lista de modelos de tu cuenta para ver cuáles tienes disponibles y qué parámetros acepta cada uno.
+The **Xiaohongshu (RedNote) content tool** helps draft copy and visuals around a product or a styling idea. For a cross-border campaign, specify the destination market, language and season in the brief. Have a local reviewer check garment measurements, translated claims and text in the final image.
 
-Puedes explorar el espacio de trabajo como visitante. Inicia sesión para consultar el coste estimado en créditos y enviar una tarea. [Visitar Senzhi AI](https://www.senzhiai.com/) · [Abrir el espacio de trabajo](https://www.senzhiai.com/workspace.php)
+Use **video generation** when motion adds information, such as a camera move from the full outfit to the collar. Select a video model before choosing duration, resolution and reference images. The supported combinations and credit estimate depend on the model.
+
+## 🧩 Batch a launch with three cardigans and ten model photos
+
+1. Open **Batch generation** and choose a model that accepts at least two reference images. Place three garment photos in the first source column and ten model photos in the second. You can import folders, drag in photos or paste images. Rearrange the columns before submitting. **The column order defines image 1, image 2 and so on in your prompt.**
+2. Choose **All combinations** for 30 groups, each containing one garment and one model photo. If a buyer has specified the exact outfit for each shot, choose **Pair in order** to match the images row by row. Add a **fixed image** column to reuse one studio background in every group. In row-by-row mode, multiple fixed references cycle through the groups.
+3. Write the shared brief. For example, “Dress the person in image 2 in the cardigan from image 1. Keep the pose, the collar stitching and the button color.” Enable **prompt optimization per group** if you want each instruction tailored to its own reference set.
+4. Inspect groups near the beginning, middle and end. Check missing references, the total number of groups and the estimated credits. Start immediately or schedule a time. **Keep the browser open until all uploads are confirmed.** A confirmed scheduled batch can optimize the prompts ahead of time and start generation at the scheduled time, even after you shut down your computer.
+5. Review progress by group. You can configure a backup model for confirmed failures and retry an eligible failed group on its own. If a result is slow to sync, look up the original task before submitting another. Successful groups can continue independently.
+
+A ten-image model limit applies to each task. Five source columns paired across 100 rows make **100 tasks with five references each**. Review the number of valid groups, resolution and prompt optimization when estimating the cost of the run. [Open batch generation](https://www.senzhiai.com/workspace.php?tool=folder_batch)
+
+## 🔍 Choose a model and check the 4K original
+
+| Job | Examples in the workspace | What to compare |
+| --- | --- | --- |
+| Product images and try-on | `nano-banana-pro`, `nano-banana-2`, `nano-banana-2.1`, and the GPT Image 2.5 Sunburst and Flare VIP editions | Try the same garment and reference in a small run. Compare the neckline, placement of buttons and preservation of the pose before assigning the full catalog. |
+| Prompt optimization and copy | `gpt-6.1-sol` and `gemini-3.8-flash` for prompt optimization. The API text catalog also lists `gemini3.1-flash`. | Use a text model to refine each group’s instructions or draft product copy from facts you supply. |
+| Video | MiniMax H3 and Agnes Video 2.5 | H3 accepts up to nine reference images and offers up to 1080p. Agnes accepts up to five and offers up to 2K. |
+
+**When you select 4K on a supported image model, Senzhi requests that resolution and delivers the original file returned by the model.** Senzhi does not upscale a lower-resolution result on its own servers and label it a 4K original. The exact pixel dimensions vary by model and aspect ratio. Download the original to check its dimensions and inspect stitching, printed lettering or a logo at full size. The gallery thumbnail is optimized for browsing.
+
+The November 6, 2026 check found nine image entries and three text models in the public-facing API catalog for the account tiers checked. Both video models above were available in the web workspace. The API supports video tasks when your account’s catalog lists an available video model. Check the live model list for current availability, input limits and pricing. [See how to list models](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+
+## 📦 Track work and hand off the originals
+
+As of November 6, 2026, **more than 40 distinct non-admin accounts** had completed a generation task on Senzhi. For teams with a daily listing deadline, the batch record shows which groups have finished, which are still running and which need another look. After uploads are confirmed, server-side processing continues across a shift change or a closed browser. If you need help, include the task number when contacting support.
+
+In **Asset Center → Image Library**, filter recent outputs by tool, select the approved shots or select all, and download the originals together as a ZIP. Save and back up the images **within five days**. Organizing the files by SKU and market makes it easier to reuse a campaign when the listing changes.
+
+## 🔌 Connect an ERP, Feishu Base or ComfyUI
+
+- **Storefronts, ERPs and catalog systems.** Fetch the models available to your account, submit one task per SKU and store the returned `request_id` alongside the product record. A later lookup can retrieve the result for your asset library. The guide includes authentication, image and text examples, video parameters and how to retry a request safely. [API guide](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+- **Feishu Base (Lark Base).** Give each row fields for the SKU, accessible reference-image URL, prompt, `request_id`, status and final asset. Use the automation’s HTTP request action to submit the task. A separate scheduled workflow can look up the task and write the outcome back to the same row. Keep the API key in a restricted integration setting.
+- **ComfyUI.** The API workspace provides a downloadable bridge plugin with image, text, text-preview and configuration nodes. For example, refine a product brief in a text node, send it to an image node and pass the output to your usual save step. [Open the API and plugin workspace](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+You can explore the workspace as a guest. To try a first run, sign in, choose one SKU and two reference photos, and check the estimated credits and downloaded original before scaling up. [Open Senzhi AI](https://www.senzhiai.com/workspace.php)
+
+---
+
+## [English · Senzhi AI developer guide · API, Feishu Base and ComfyUI](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+
+Use a catalog row to request a white-background packshot and a short listing description based on verified product facts. Each job returns a request ID, so the merchandising team can write the approved image and copy back to the correct SKU.
+
+[Manage API keys in the workspace](https://www.senzhiai.com/workspace.php?tool=open_api) · [简体中文指南](https://iwkai312.github.io/Senzhi-AI/api-zh.html) · [Product and batch generation guide](https://iwkai312.github.io/Senzhi-AI/en.html)
+
+## Three API calls from model selection to delivery
+
+Use `https://www.senzhiai.com` as the base URL. Sign in to the workspace and create a key under API access. Send it from your server in the `Authorization: Bearer <key>` header or the `X-API-Key` header. The Bash and curl examples below read the key from the `SENZHI_API_KEY` environment variable.
+
+| Step | Method and path | What to keep |
+| --- | --- | --- |
+| Discover models | `GET /api/open_models.php` | Model reference, supported parameters, pricing and example request |
+| Create a job | `POST /api/open_generate.php` | The returned `request_id` |
+| Retrieve a result | `GET /api/open_result.php?request_id=...` | An image or video file URL, or generated text |
+
+### 1. Read the model catalog for your account
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  'https://www.senzhiai.com/api/open_models.php?type=image'
+```
+
+Set `type` to `image`, `text` or `video`, or omit it to list all available types. Reading the catalog is free. Choose an entry under `models`, check `pricing` and copy its `request_example`. The example uses a Senzhi `model_id` such as `db:123`. To select by display name, replace that field with `model_name` and use the exact spelling and capitalization. If the account has two models with the same name, the API returns `409 AMBIGUOUS_MODEL`. Select the intended model by ID.
+
+### 2. Submit a white-background packshot
+
+Save the JSON below as `request.json`. This example selects `nano-banana-pro` by name. Check that it appears in your account’s catalog, then replace the example image URL with your own. If you choose a different model, carry over its required options from `request_example`. Use a direct HTTPS image URL accessible to Senzhi. The order of `images` determines which reference your prompt calls image 1 or image 2.
+
+```json
+{
+  "model_name": "nano-banana-pro",
+  "prompt": "Create a front-facing white-background packshot of the cream cardigan in image 1. Preserve the collar, buttons and ribbed cuffs.",
+  "images": ["https://example.com/products/knit-01.jpg"],
+  "idempotency_key": "catalog-knit-01-white-v1"
+}
+```
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json \
+  'https://www.senzhiai.com/api/open_generate.php'
+```
+
+One request creates one job and `n` is fixed at 1. Save the returned `request_id`. For example, `{"success":true,"request_id":"req_example","status":"queued"}` means the job is in the queue. Assign a new `idempotency_key` to each new job. If the connection drops before an ID arrives, repeat the **same request body with the same API key and idempotency key** to recover the accepted job.
+
+### 3. Poll the original job and save its output
+
+```bash
+curl --silent --show-error --get \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  --data-urlencode 'request_id=req_example' \
+  'https://www.senzhiai.com/api/open_result.php'
+```
+
+Replace `req_example` with the ID from the previous call and use the API key that created the job. Check the JSON `status` field on each response.
+
+| Job status | Client action |
+| --- | --- |
+| `pending`, `queued`, `processing` | Poll again in 5–10 seconds. Follow `Retry-After` or `retry_after` when provided. |
+| `success` | Download the original image or video from `result.url` promptly. Read generated text from `result.content`. |
+| `failed` | Record `error.code` and `error.message`. Review the cause before creating another job. |
+
+For a file download, set `RESULT_URL` to the full `result.url`, preserving its query string. For PNG output, run `curl --fail --location --proto '=https' --proto-redir '=https' --output knit-01.png "$RESULT_URL"`. Send only the file URL to the download host. The Senzhi API key belongs on requests to the Senzhi API domain.
+
+After you have an ID, keep querying that job if polling times out or returns `503 MEDIA_UNAVAILABLE`. A `410 MEDIA_EXPIRED` response means the output has passed its retention period.
+
+## Choosing parameters for images, text and video
+
+On November 6, 2026, the standard and VIP account catalogs checked on the live site listed image and text models. The video workspace also offered MiniMax H3 and Agnes Video 2.5. The API supports video jobs once a model appears in your account’s `type=video` catalog. The video lists checked on that date were empty.
+
+| Catalog task | Fields to check |
+| --- | --- |
+| Images · generate a hero image and a detail shot | Read `parameter_combinations` and `parameters`. Pick supported values for `options.resolution`, `aspect_ratio`, `quality` and `format`. For 4K, confirm the chosen combination offers that resolution. |
+| Text · write multilingual listings from product facts | Put the language, length and verified facts in `prompt`. An optional `system_prompt` can set brand voice. Check image input support and the maximum image count before adding references. |
+| Video · create a vertical clip for a product listing | Start with the video model’s `request_example`. Read `video_capabilities` for duration, resolution, aspect ratio and reference images. Keep `options.pricing_version`. Multiply the rate for the chosen resolution by the duration in seconds. If the price version changes, refresh the catalog and review the new quote. |
+
+### Generate a product bullet for an overseas listing
+
+Save this body as `request.json` and reuse the POST and polling commands above. Replace the idempotency key with one specific to this new job, and retain it if you retry the same submission. When the status is `success`, read the copy from `result.content`.
+
+```json
+{
+  "model_name": "gpt-6.1-sol",
+  "prompt": "Write one product bullet in English, up to 20 words. Verified details: this is a cream knit cardigan with four front buttons. Use only those facts.",
+  "idempotency_key": "catalog-knit-01-copy-en-v1"
+}
+```
+
+### Model display names verified on 6 November 2026
+
+Copy the exact capitalization, spaces and brackets when using `model_name`. Query your own live catalog before submitting.
+
+| Type | Names as shown in the catalog |
+| --- | --- |
+| Image | `nano-banana-pro` · `nano-banana-pro-vip（谷歌官方）` · `Nano Banana Pro【VIP】` |
+| Image | `nano-banana-2` · `nano-banana-2.1` · `Nano-banana-2.1【VIP】` |
+| Image | `GPT-image-2.5-sunburst【VIP】` · `GPT-image-2.5-flare【VIP】` · `GPT Image 2.0【VIP】` |
+| Text | `gpt-6.1-sol` · `gemini-3.8-flash` · `gemini3.1-flash` |
+
+## Feishu Base · start a job from a SKU row
+
+Give a merchandiser a “Ready” status they can set when the brief and reference photo are approved. In Feishu Base, build the following workflow with the **Send HTTP request** automation action. [Feishu’s HTTP action guide](https://www.feishu.cn/hc/zh-CN/articles/410063847664)
+
+1. **Set up fields.** Add SKU, brief version, reference image URL, prompt, model ID, status, request ID and output URL. If the photo requires a Feishu login, use an authorized service to obtain a direct link accessible to Senzhi, with enough validity for processing.
+2. **Submit once.** Trigger the POST when a row enters “Ready” and its request ID is empty. Combine the record ID, task purpose and version into a stable idempotency key. Store the API key in restricted automation settings or on your own server. Parse the response as JSON, write the returned request ID to the row and set the status to “Processing.”
+3. **Collect results separately.** Schedule a second workflow for unfinished rows with a request ID. Set the request URL to `https://www.senzhiai.com/api/open_result.php`. Add `request_id` in Feishu’s query parameter fields and map it to the row. On success, save `result.url` or `result.content`. On failure, save the error. For long-term storage, download originals into your team’s library and keep its permanent link in the row.
+
+## ComfyUI · use Senzhi in a node workflow
+
+The API workspace offers a **ComfyUI plug-in** and its installation guide. A catalog workflow can feed the output of a text node into an image node as a photographic brief, then preview or save the resulting image. [Get the plug-in and setup instructions](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+1. Extract the archive so that `ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/` contains `requirements.txt` directly.
+2. Use the Python environment that runs ComfyUI to install the requirements. From the directory containing `ComfyUI/`, for example, run `python -m pip install -r ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/requirements.txt`.
+3. Restart ComfyUI and refresh the browser. Search the canvas for `森智AI` or `NewAPI`. Configure the Senzhi service and your API key in the configuration node, choose an available model and connect the image, text or text preview nodes. Remove the key and inspect the exported JSON before sharing a workflow.
+
+---
+
+## [日本語 · 森智 AI（Senzhi AI）｜EC・越境EC向けの商品画像と動画制作](https://iwkai312.github.io/Senzhi-AI/ja.html)
+
+森智 AI は、EC・越境ECの出品担当者や制作チームが、手元の商品写真からカタログ画像、着用イメージ、商品ページ、販促用動画を作るためのワークスペースです。たとえば新作のカーディガンを登録するとき、商品一覧には白背景の正面カットを、詳細ページには編み地のアップを、SNSには着用シーンを用意できます。
+
+[公式サイト](https://www.senzhiai.com/) · [ワークスペースを試す](https://www.senzhiai.com/workspace.php) · [開発者向けAPIガイド](https://iwkai312.github.io/Senzhi-AI/api-ja.html)
+
+## 商品に合わせて制作ツールを選ぶ
+
+| 作りたいもの | 用意するものと制作の流れ |
+| --- | --- |
+| 白背景の商品画像 | 商品写真をアップロードし、背景を白にそろえたカットを生成します。色違いの商品を一覧に並べたときも、各商品のシルエットを比較しやすくなります。 |
+| 商品のディテールカット | 袖口、ボタン、金具など、見せたい部分が写った写真を入力します。拡大して見せる箇所を指定し、詳細ページに添えるカットを作ります。 |
+| 着用イメージ・商品差し替え | 商品の写真と、構図やポーズの参考にする写真を用意します。1対1で着用例を作るほか、同じ服を複数のモデル写真に合わせて比較できます。 |
+| 使用シーンのイメージ | 商品写真をもとに、日常で使う場面を指定します。たとえばバッグをカフェの椅子に置いた販促用カットを作れます。 |
+| 商品詳細ページ | 既存の見本画像と商品写真を組み合わせ、シリーズでレイアウトをそろえます。文字や画像の位置を自分で決めたいときは、キャンバス上で編集し、ページ全体または分割画像を書き出せます。 |
+| 広告・SNS用の素材 | テキストから新しい構図を試したり、参考画像を添えて販促ビジュアルを作ったりできます。小紅書（RED）向けの制作ツールでは、画像の雰囲気と投稿文への指示を別々に指定できます。 |
+| 商品紹介動画 | 動きやカメラワークを文章で伝え、対応モデルでは参考画像も追加できます。たとえば「正面から袖口へゆっくり寄る」と指示し、モデルで選べる尺と画質で短い商品動画を作ります。 |
+
+## 3着のニットを10人のモデルに合わせる
+
+1. **素材を並べます。** 「批量生图」（一括生成）で、1列目にニット3点、2列目にモデル写真10枚を追加します。フォルダーをまとめて選ぶこともできます。プレビューで写真や列を並べ替えると、「画像1」「画像2」もその順番になります。
+2. **組み合わせ方を決めます。** 「全部组合」（すべての組み合わせ）を選ぶと、ニット1着につき10枚のモデル写真を使い、合計30組になります。「按顺序配对」（順番に組み合わせる）では、各列の1枚目同士、2枚目同士が1組になります。SKUごとに使う写真が決まっているときに向いています。
+3. **共通の指示を書きます。** たとえば「画像2の人物に画像1のニットを着せてください。襟の形と編み柄を保ち、人物のポーズと背景は元の写真に合わせてください」。組ごとに指示を調整したい場合は、プロンプトの自動最適化を有効にします。
+4. **見積もりと実行時間を確認します。** 組数、モデル、ポイントを確かめ、すぐに開始するか日時を予約します。予約と自動最適化を併用すると、全素材のアップロード確認後に各組の指示文を準備し、予約時刻から画像生成に進みます。アップロード完了後は、パソコンを閉じても処理が続きます。
+
+毎回同じ撮影背景を使うなら、順番に組み合わせるモードで「固定图片」（固定画像）の列を追加します。背景1枚なら全組で共用し、2枚以上なら登録した順に繰り返します。1枚の参照画像を各行へ入れ直す手間が省けます。[一括生成を開く](https://www.senzhiai.com/workspace.php?tool=folder_batch)
+
+## モデル選びと4Kの原寸ファイル
+
+画像生成では `nano-banana-pro`、`nano-banana-2`、`nano-banana-2.1`、GPT Image 2.5のVIPモデル（Sunburst・Flare）、GPT Image 2.0 VIPなどを扱っています。動画はMiniMax H3が最大9枚の参考画像と最高1080p、Agnes Video 2.5が最大5枚と最高2Kに対応します。実際に選べるモデル、パラメーター、必要なポイントはアカウントの各ツールで確認できます。
+
+指示文の調整には `gpt-6.1-sol` と `gemini-3.8-flash` を利用できます。たとえば色違いのニットを一括で扱うときに、各組の商品とモデル写真をもとに共通の制作指示を調整できます。
+
+対応モデルで4Kを選ぶと、森智 AI はそのモデルの4K設定で生成を依頼し、返ってきた元画像をそのまま提供します。低解像度の結果を森智 AI 側で引き伸ばして4Kとして提供することはありません。「图片空间」（画像スペース）から原寸でダウンロードし、ピクセル寸法を確認したうえで、生地の色や襟の形、縫い目を商品写真と見比べてください。画像スペースでは制作ツール別に結果を絞り込み、採用したカットだけを選んでZIPにまとめられます。生成画像の保存期間は5日間と案内しています。使いたい原本は商品管理用のフォルダーへ保存してください。
+
+2026年11月6日までに、管理者を除く40を超えるアカウントで生成が完了しています。まとめて依頼した場合も進行状況は組ごとに確認できます。結果の照会が一時的に途切れた場合は同じ依頼を再照会します。失敗が確定した組は個別に再試行でき、事前に予備モデルを選んだ場合は、その設定に従って次の試行に進みます。
+
+## API、飛書多維表格、ComfyUIとの連携
+
+自社の商品管理システムから画像生成やテキスト生成を依頼できます。2026年11月6日時点のAPIモデル一覧には画像9件とテキスト3件が掲載されています。テキストには `gemini3.1-flash` もあります。動画も扱えるAPI仕様ですが、現在の動画モデルはワークスペースで利用できます。まずアカウントのAPIキーで最新の一覧を取得し、用途、対応パラメーター、ポイントを確認してください。SKUと応答の `request_id` を対応付けると、結果の取り込み先が明確になります。
+
+- **飛書多維表格（Feishu Base）との接続**　SKU、画像URL、制作指示、`request_id`、結果の列を用意します。表の自動化に「发送 HTTP 请求」（HTTPリクエストの送信）を組み込み、生成を依頼します。保存した `request_id` で完了を確認したら、結果を同じ行に書き戻します。APIキーはアクセスを制限した自動化の設定やサーバー側に保管してください。
+- **ComfyUI用プラグイン**　ワークスペースのAPI画面からダウンロードできます。展開したプラグインのフォルダーを `ComfyUI/custom_nodes/` に入れ、案内に従って依存パッケージをインストールして再起動します。「森智AI」または「NewAPI」で検索すると、画像・テキスト生成、テキストのプレビュー、接続設定のノードを選べます。ワークフローを共有する際はAPIキーを消去してください。
+
+[開発者向けAPIガイド](https://iwkai312.github.io/Senzhi-AI/api-ja.html) · [APIガイド（簡体中国語）](https://iwkai312.github.io/Senzhi-AI/api-zh.html) · [アカウントで使えるモデルを確認する](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+---
+
+## [日本語 · 森智 AI 開発ガイド｜API・飛書多維表格・ComfyUI](https://iwkai312.github.io/Senzhi-AI/api-ja.html)
+
+商品管理表の1行から白背景の画像を作り、完成したファイルを同じSKUに登録する手順です。画像やテキストを書き戻すには、モデルの取得、生成の依頼、結果の照会の3つの操作を組み合わせます。
+
+[APIキーの管理](https://www.senzhiai.com/workspace.php?tool=open_api) · [製品と一括生成のガイド](https://iwkai312.github.io/Senzhi-AI/ja.html) · [English](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+
+## 1. このアカウントで使えるモデルを調べる
+
+ワークスペースにログインし、API画面でキーを作成します。次の例はBashとcurlを使い、サーバーに設定した環境変数 `SENZHI_API_KEY` からキーを読み取ります。リクエストの認証には `Authorization: Bearer <key>` または `X-API-Key` ヘッダーを使用します。
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  'https://www.senzhiai.com/api/open_models.php?type=image'
+```
+
+`type` には `image`、`text`、`video` を指定でき、省略すると全件を取得します。モデル一覧の照会は無料です。`models` 配列から目的のモデルを探し、`pricing` と `request_example` を確認してください。`model_id` には `db:123` のような森智の識別子を指定します。表示名で選ぶ場合は代わりに `model_name` を使い、大文字・小文字も一覧とそろえます。同名のモデルで `409 AMBIGUOUS_MODEL` が返った場合は識別子を指定してください。
+
+## 2. 商品画像を1枚依頼する
+
+次のJSONを `request.json` として保存し、サンプルのURLを商品画像のURLに置き換えます。画像は森智 AI が読み取れるHTTPSの直リンクを用意してください。`images` の順番が指示文の「画像1」「画像2」に対応します。モデルを変更する際は、取得した `request_example` に合わせて必須項目も調整します。
+
+```json
+{
+  "model_name": "nano-banana-pro",
+  "prompt": "画像1の生成り色のカーディガンを正面から撮った白背景の商品画像を作成してください。襟、ボタン、袖口のリブを保ってください。",
+  "images": [
+    "https://example.com/products/knit-01.jpg"
+  ],
+  "idempotency_key": "catalog-knit-01-white-v1"
+}
+```
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json \
+  'https://www.senzhiai.com/api/open_generate.php'
+```
+
+1件の依頼に対して `n` は1です。応答例 `{"success":true,"request_id":"req_example","status":"queued"}` の `request_id` をSKUにひも付けて保存します。新しい依頼には新しい `idempotency_key` を設定してください。応答が届く前に通信が切れた場合は、同じAPIキー、同じ `idempotency_key`、同じリクエスト本文で再送し、受理済みの依頼を取得します。
+
+## 3. 元の依頼を照会して原本を保存する
+
+`req_example` を受け取ったIDに置き換え、送信時のAPIキーで照会します。
+
+```bash
+curl --silent --show-error --get \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  --data-urlencode 'request_id=req_example' \
+  'https://www.senzhiai.com/api/open_result.php'
+```
+
+| JSONの `status` | 次の操作 |
+| --- | --- |
+| `pending` / `queued` / `processing` | 5～10秒後に再照会します。`Retry-After` または `retry_after` を受け取ったら、その待ち時間に従います。 |
+| `success` | 画像・動画は `result.url`、テキストは `result.content` を取得します。署名付きURLはクエリ文字列を含めてそのまま使い、原本を早めに保存します。 |
+| `failed` | `error.code` と `error.message` を記録し、原因を確認します。 |
+
+照会のタイムアウトや `503 MEDIA_UNAVAILABLE` が発生したら、受け取った元のIDで照会を続けます。`410 MEDIA_EXPIRED` は保存期間が過ぎたことを示します。ファイルのダウンロード先には `result.url` だけを渡し、森智のAPIキーは森智のAPIドメインへのリクエストにだけ付けます。
+
+## 画像・テキスト・動画の設定
+
+- **画像**は `parameter_combinations` と `parameters` を調べ、希望する解像度・縦横比・品質・形式を組み合わせます。4Kは対応する設定で選べます。
+- **テキスト**は `prompt` に商品の事実、対象言語、文字数を書きます。文体は `system_prompt` で指定できます。参考画像を添える場合は、そのモデルの対応と枚数を確認してください。
+- **動画**はアカウントの `type=video` にモデルが掲載されたときに使えます。2026年11月6日に確認したAPI一覧の動画欄は空で、MiniMax H3とAgnes Video 2.5はWeb版で利用できました。APIから使う際は `video_capabilities` で尺・画質・参照画像を確認し、例にある `options.pricing_version` を保持します。料金は選んだ解像度の毎秒単価と秒数で決まります。
+
+### 海外向け商品ページの特長を英語で書く
+
+次の本文を `request.json` に保存し、商品画像の例と同じPOSTと照会コマンドを使います。新しい依頼には専用の `idempotency_key` を設定し、同じ依頼を再送するときは元の値を使ってください。状態が `success` になったら、`result.content` から英文を取得します。
+
+```json
+{
+  "model_name": "gpt-6.1-sol",
+  "prompt": "商品ページに載せる英語の説明を20語以内で1文書いてください。確認済みの事実は、クリーム色のニットカーディガンで、前にボタンが4つあることです。この情報のみを使ってください。",
+  "idempotency_key": "catalog-knit-01-copy-en-v1"
+}
+```
+
+### APIモデル名一覧（2026年11月6日確認）
+
+`model_name` には大文字・小文字、空白、括弧を含めて下記の表記をそのまま使います。送信前に自分のアカウントの最新一覧を確認してください。
+
+| 種類 | 一覧の表示名 |
+| --- | --- |
+| 画像 | `nano-banana-pro` · `nano-banana-pro-vip（谷歌官方）` · `Nano Banana Pro【VIP】` |
+| 画像 | `nano-banana-2` · `nano-banana-2.1` · `Nano-banana-2.1【VIP】` |
+| 画像 | `GPT-image-2.5-sunburst【VIP】` · `GPT-image-2.5-flare【VIP】` · `GPT Image 2.0【VIP】` |
+| テキスト | `gpt-6.1-sol` · `gemini-3.8-flash` · `gemini3.1-flash` |
+
+## 飛書多維表格（Feishu Base）へ結果を書き戻す
+
+1. SKU、制作指示、画像URL、版番号、モデル、状態、タスクID、結果の列を作ります。飛書へのログインを求める添付URLは、権限を持つサービスから取得した、生成に必要な有効期間の直リンクに置き換えてください。
+2. 承認済みでタスクIDが空の行を対象に、「发送 HTTP 请求」（HTTPリクエストの送信）から上記のPOSTを送ります。行ID・用途・版番号を組み合わせた固定の `idempotency_key` を使い、応答の `request_id` を同じ行に保存します。APIキーはアクセスを制限した自動化の設定か、自社のサーバー側に保管します。
+3. 別の定期処理で未完了の行を抽出し、GETの `request_id` パラメーターに行内のIDを設定します。完了時に `result.url` か `result.content` を書き戻します。長期保管には原本を素材庫にコピーします。
+
+## ComfyUIで商品制作のノードを組む
+
+ワークスペースのAPI画面からプラグインをダウンロードし、`ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/` の直下に `requirements.txt` がある形で展開します。ComfyUIを実行するPython環境で依存パッケージをインストールし、ComfyUIを再起動してブラウザーを更新します。「森智AI」または「NewAPI」を検索し、設定ノードに接続情報を入力すると、画像・テキスト・テキストプレビューのノードを使えます。共有前にはAPIキーを削除し、書き出したJSONも確認してください。[プラグインとインストール手順](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+---
+
+## [한국어 · Senzhi AI(森智 AI) | 쇼핑몰 상품 이미지와 영상 제작](https://iwkai312.github.io/Senzhi-AI/ko.html)
+
+Senzhi AI는 국내외 온라인몰에서 상품을 판매하는 팀을 위한 이미지·영상 제작 서비스입니다. 신상품 니트 한 벌을 촬영해 두면 흰 배경의 목록 이미지, 소매의 짜임이 보이는 상세 컷, 모델 착용 예시를 용도에 맞게 만들 수 있습니다. 상품 수가 많을 때는 품목별 폴더를 그대로 불러와 한꺼번에 조합할 수 있습니다.
+
+[공식 사이트](https://www.senzhiai.com/) · [작업 공간 열기](https://www.senzhiai.com/workspace.php) · [개발자 API 가이드](https://iwkai312.github.io/Senzhi-AI/api-ko.html)
+
+## 상품 등록부터 광고 소재까지
+
+| 필요한 이미지나 영상 | 준비할 자료와 활용 방법 |
+| --- | --- |
+| 흰 배경 상품 컷 | 제품이 선명하게 보이는 사진을 올려 흰 배경 이미지를 만듭니다. 옵션별 색상과 실루엣이 한눈에 들어오도록 상품 목록의 배경을 통일할 때 유용합니다. |
+| 소재와 마감 디테일 | 소맷단, 지퍼, 자수처럼 강조할 부분이 보이는 사진을 넣습니다. 원하는 부분을 지정해 상세 페이지의 설명 옆에 배치할 디테일 컷을 만듭니다. |
+| 가상 착용 및 상품 교체 | 상품 사진과 포즈나 구도를 참고할 사진을 짝지어 착용 컷을 만듭니다. 한 벌과 한 사람을 조합하거나, 같은 옷을 여러 모델에게 입힌 결과를 비교할 수 있습니다. |
+| 생활 속 사용 장면 | 상품 사진에 촬영 장소와 사용 상황을 덧붙입니다. 가방을 카페 의자에 걸어 둔 장면처럼 고객이 사용 모습을 떠올릴 수 있는 이미지를 만듭니다. |
+| 상세 페이지 제작 | 참고할 레이아웃과 상품 사진을 조합해 여러 SKU의 구성을 맞춥니다. 캔버스 편집기에서는 사진과 문구를 직접 배치하고 완성한 페이지를 통째로 또는 구간별 이미지로 내보낼 수 있습니다. |
+| 광고와 SNS 콘텐츠 | 문장만으로 새 콘셉트를 시험하거나 참고 이미지에 원하는 변화를 설명합니다. 샤오홍슈(RED)용 콘텐츠 제작에서는 이미지의 분위기와 게시글에서 강조할 내용을 따로 지정할 수 있습니다. |
+| 상품 소개 영상 | 카메라와 상품의 움직임을 적고, 모델이 지원하면 참고 이미지를 추가합니다. 정면에서 천천히 소매 쪽으로 다가가는 영상처럼 정지 사진을 보완할 짧은 장면을 만들 수 있습니다. |
+
+## 니트 3종을 모델 사진 10장과 조합하기
+
+1. **열에 자료를 나눠 담습니다.** ‘批量生图’(일괄 생성)의 첫 번째 열에는 니트 사진 3장, 두 번째 열에는 모델 사진 10장을 넣습니다. 폴더째 가져온 뒤 미리보기에서 사진과 열의 순서를 바꿀 수 있습니다. 프롬프트의 ‘이미지 1’, ‘이미지 2’는 왼쪽부터 매긴 열 순서입니다.
+2. **조합 방식을 고릅니다.** ‘全部组合’(모든 조합)을 선택하면 니트 한 벌에 모델 사진 10장씩, 총 **30개 그룹**이 만들어집니다. 착용 모델이 상품마다 정해져 있다면 순서대로 짝짓기를 선택하세요. 첫 번째 열의 첫 사진과 두 번째 열의 첫 사진이 한 그룹이 됩니다.
+3. **공통 지시문을 작성합니다.** 예를 들어 “이미지 2의 모델에게 이미지 1의 니트를 입혀 주세요. 옷깃과 짜임, 모델의 자세와 배경을 유지해 주세요”라고 적습니다. 각 조합의 사진에 맞춰 문장을 다듬고 싶다면 그룹별 프롬프트 최적화를 켭니다.
+4. **예상 포인트와 실행 시간을 확인합니다.** 바로 시작하거나 예약할 수 있습니다. 예약과 최적화를 함께 켜면 전체 자료의 업로드가 확인된 뒤 그룹별 프롬프트를 미리 준비하고, 예약 시각부터 이미지 생성을 진행합니다. 업로드 완료를 확인한 뒤에는 컴퓨터를 꺼도 됩니다.
+
+같은 배경을 반복해서 쓸 때는 순서대로 짝짓기에서 **고정 이미지** 열을 추가하세요. 한 장을 넣으면 모든 그룹이 같은 배경을 사용하고, 여러 장을 넣으면 입력한 순서대로 돌아가며 사용합니다. [일괄 생성 열기](https://www.senzhiai.com/workspace.php?tool=folder_batch)
+
+## 모델 선택과 4K 원본 확인
+
+이미지 모델의 예로 `nano-banana-pro`, `nano-banana-2`, `nano-banana-2.1`, GPT Image 2.5의 Sunburst·Flare VIP 모델, GPT Image 2.0 VIP가 있습니다. 영상 모델 MiniMax H3는 참고 이미지 최대 9장과 최대 1080p를, Agnes Video 2.5는 최대 5장과 최대 2K를 지원합니다. 작업에 적용할 모델과 해상도, 차감 포인트는 계정의 해당 도구에서 확인하세요.
+
+프롬프트 최적화에는 `gpt-6.1-sol`과 `gemini-3.8-flash`를 사용할 수 있습니다. 같은 디자인의 니트가 여러 색상으로 출시됐다면, 각 그룹에 들어간 상품·모델 사진을 보고 공통 지시문을 다듬도록 설정할 수 있습니다.
+
+4K를 지원하는 모델에서 4K를 선택하면 Senzhi AI는 해당 해상도로 생성을 요청하고 모델이 반환한 원본을 제공합니다. 플랫폼에서 낮은 해상도의 결과를 사후에 확대해 4K로 제공하지 않습니다. ‘图片空间’(이미지 보관함)에서 원본을 내려받아 픽셀 크기를 확인하고, 등록 전에 색상과 조직을 실제 제품 사진과 비교해 보세요. 보관함에서 제작 도구별로 결과를 모아 보고, 채택한 컷만 골라 ZIP으로 받을 수 있습니다. 생성 이미지의 보관 안내 기간은 5일이므로 사용할 원본은 별도로 저장해 두세요.
+
+2026년 11월 6일 기준으로 관리자 계정을 제외하고 40개가 넘는 계정에서 생성 작업을 완료했습니다. 작업 내역에서 그룹별 진행 상태를 볼 수 있고, 결과를 조회하는 도중 연결이 끊기면 기존 요청 상태를 다시 조회합니다. 실패가 확인된 그룹은 따로 재시도할 수 있으며, 일괄 작업을 설정할 때 예비 모델도 지정할 수 있습니다.
+
+## API, 페이수 다차원 표, ComfyUI 연결
+
+상품 관리 시스템에서 이미지·텍스트 생성을 요청할 수 있습니다. 2026년 11월 6일 기준 API 목록에는 이미지 9개, 텍스트 3개 항목이 있으며 텍스트 모델에는 `gemini3.1-flash`도 있습니다. API 규격은 영상 작업을 지원하며, 현재 영상 모델은 웹 작업 공간에서 사용할 수 있습니다. 먼저 계정의 API 키로 최신 목록을 조회해 입력 옵션과 가격을 확인하세요. 각 SKU에 응답의 `request_id`를 기록해 두면 완성된 이미지를 해당 상품에 연결할 수 있습니다.
+
+- **페이수 다차원 표(Feishu Base, 飞书多维表格).** SKU, 참고 이미지 URL, 프롬프트, `request_id`, 결과 열을 만듭니다. 자동화의 ‘发送 HTTP 请求’(HTTP 요청 보내기) 단계를 구성해 작업을 제출하고, 완료 여부를 조회한 뒤 결과를 같은 행에 기록합니다. API 키는 권한이 제한된 자동화나 서버 측에 보관하세요.
+- **ComfyUI.** 작업 공간의 API 메뉴에서 플러그인과 설치 안내를 확인할 수 있습니다. 압축을 푼 플러그인 폴더를 `ComfyUI/custom_nodes/`에 두고 안내에 따라 의존성을 설치한 뒤 재시작합니다. ‘森智AI’ 또는 ‘NewAPI’로 검색하면 이미지, 텍스트, 텍스트 미리보기, 연결 설정 노드를 찾을 수 있습니다. 워크플로 파일을 공유하기 전에 API 키를 지우세요.
+
+[개발자 API 가이드](https://iwkai312.github.io/Senzhi-AI/api-ko.html) · [중문 API 가이드](https://iwkai312.github.io/Senzhi-AI/api-zh.html) · [모델 목록과 ComfyUI 플러그인](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+---
+
+## [한국어 · Senzhi AI 개발 가이드 | API, 페이수 다차원 표, ComfyUI](https://iwkai312.github.io/Senzhi-AI/api-ko.html)
+
+상품 관리표에 등록한 SKU와 사진을 바탕으로 대표 이미지를 만들고 결과를 같은 행에 기록할 수 있습니다. 아래는 이미지 모델을 조회하고 흰 배경 상품 컷 한 장을 요청한 뒤 원본을 받는 과정입니다.
+
+[API 키 관리](https://www.senzhiai.com/workspace.php?tool=open_api) · [제품 및 일괄 생성 가이드](https://iwkai312.github.io/Senzhi-AI/ko.html) · [English](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+
+## 1. 계정의 모델 목록 조회
+
+작업 공간에 로그인해 API 메뉴에서 키를 만드세요. 아래 Bash와 curl 예제는 서버의 `SENZHI_API_KEY` 환경 변수에서 키를 읽습니다. 인증할 때는 `Authorization: Bearer <key>` 또는 `X-API-Key` 헤더를 사용합니다.
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  'https://www.senzhiai.com/api/open_models.php?type=image'
+```
+
+`type`은 `image`, `text`, `video` 중 하나이며 생략하면 전체 목록을 조회합니다. 목록 조회는 무료입니다. `models` 배열에서 원하는 모델의 `pricing`과 `request_example`을 확인하세요. `model_id`에는 `db:123`처럼 Senzhi에서 발급한 식별자를 사용합니다. 이름으로 호출할 때는 `model_id` 대신 대소문자까지 정확히 일치하는 `model_name`을 사용하세요. 이름이 겹쳐 `409 AMBIGUOUS_MODEL`이 반환되면 모델 ID를 지정합니다.
+
+## 2. 흰 배경 상품 컷 한 장 요청
+
+아래 JSON을 `request.json`으로 저장하고 예시 이미지 URL을 자신의 상품 사진 주소로 바꾸세요. Senzhi가 접근할 수 있는 HTTPS 이미지 직접 링크를 사용합니다. `images` 배열 순서가 프롬프트의 ‘이미지 1’, ‘이미지 2’에 해당합니다. 모델을 바꿀 때는 그 모델의 `request_example`에 있는 필수 옵션을 함께 사용하세요.
+
+```json
+{
+  "model_name": "nano-banana-pro",
+  "prompt": "이미지 1에 있는 크림색 카디건의 정면 흰 배경 상품 사진을 만들어 주세요. 옷깃, 단추, 소매 끝의 골지 짜임을 살려 주세요.",
+  "images": [
+    "https://example.com/products/knit-01.jpg"
+  ],
+  "idempotency_key": "catalog-knit-01-white-v1"
+}
+```
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json \
+  'https://www.senzhiai.com/api/open_generate.php'
+```
+
+요청 하나가 작업 한 건을 만들며 `n`은 1입니다. 예시 응답 `{"success":true,"request_id":"req_example","status":"queued"}`에서 `request_id`를 저장하세요. 새 작업에는 새로운 `idempotency_key`를 부여합니다. 작업 ID를 받기 전에 연결이 끊기면 **같은 API 키, 같은 멱등 키, 같은 요청 본문**으로 다시 보내 기존에 접수된 작업을 찾습니다.
+
+## 3. 원래 작업 조회 및 원본 저장
+
+`req_example`을 직전에 받은 ID로 바꾸고 작업을 제출한 API 키로 조회합니다.
+
+```bash
+curl --silent --show-error --get \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  --data-urlencode 'request_id=req_example' \
+  'https://www.senzhiai.com/api/open_result.php'
+```
+
+| JSON의 `status` | 처리 방법 |
+| --- | --- |
+| `pending` / `queued` / `processing` | 5~10초 뒤 다시 조회합니다. `Retry-After` 또는 `retry_after`가 있으면 해당 대기 시간을 따릅니다. |
+| `success` | 이미지·영상은 `result.url`, 텍스트는 `result.content`를 읽습니다. 파일 URL의 쿼리 문자열을 보존해 원본을 내려받으세요. |
+| `failed` | `error.code`와 `error.message`를 저장하고 원인을 확인합니다. |
+
+조회가 시간 초과되거나 `503 MEDIA_UNAVAILABLE`가 반환되면 기존 ID로 계속 조회하세요. `410 MEDIA_EXPIRED`는 결과 보관 기간이 끝났다는 의미입니다. 파일을 내려받을 때는 `result.url`만 사용하고, Senzhi API 키는 Senzhi API 도메인에만 전송하세요.
+
+## 이미지·텍스트·영상별 입력
+
+- **이미지**는 `parameter_combinations`와 `parameters`에서 해상도, 비율, 품질, 포맷의 가능한 조합을 확인합니다. 4K가 필요하면 모델이 해당 조합을 제공하는지 확인하세요.
+- **텍스트**는 `prompt`에 검증된 제품 정보, 작성 언어, 분량을 넣습니다. `system_prompt`로 브랜드 문체를 지정할 수 있습니다. 참고 이미지는 모델의 입력 지원 여부와 허용 장수를 확인한 뒤 추가하세요.
+- **영상**은 계정의 `type=video` 목록에 모델이 표시될 때 호출할 수 있습니다. 2026년 11월 6일 확인한 API 목록에는 영상 모델이 없었으며, MiniMax H3와 Agnes Video 2.5는 웹 작업 공간에서 제공됐습니다. API 영상 모델을 사용할 때는 `video_capabilities`에서 길이, 해상도, 참고 이미지를 확인하고 예제의 `options.pricing_version`을 유지하세요. 선택한 해상도의 초당 가격과 길이로 비용을 계산합니다.
+
+### 해외 상품 페이지에 넣을 영문 문구 작성
+
+다음 본문을 `request.json`으로 저장하고 이미지 예제의 POST와 조회 명령을 그대로 사용하세요. 새 작업마다 전용 `idempotency_key`로 바꾸고, 같은 요청을 재전송할 때는 원래 값을 유지하세요. 상태가 `success`가 되면 `result.content`에서 영문 문구를 읽습니다.
+
+```json
+{
+  "model_name": "gpt-6.1-sol",
+  "prompt": "영어로 상품 소개 문장 하나를 20단어 이내로 작성해 주세요. 확인된 사실은 크림색 니트 카디건이며 앞면에 단추가 네 개 있다는 것입니다. 이 사실만 사용하세요.",
+  "idempotency_key": "catalog-knit-01-copy-en-v1"
+}
+```
+
+### API 모델 표시 이름 (2026년 11월 6일 확인)
+
+`model_name`에는 대소문자, 띄어쓰기, 괄호를 포함하여 표시 이름을 그대로 입력하세요. 제출 전에는 내 계정의 최신 목록을 확인하세요.
+
+| 유형 | 목록의 표시 이름 |
+| --- | --- |
+| 이미지 | `nano-banana-pro` · `nano-banana-pro-vip（谷歌官方）` · `Nano Banana Pro【VIP】` |
+| 이미지 | `nano-banana-2` · `nano-banana-2.1` · `Nano-banana-2.1【VIP】` |
+| 이미지 | `GPT-image-2.5-sunburst【VIP】` · `GPT-image-2.5-flare【VIP】` · `GPT Image 2.0【VIP】` |
+| 텍스트 | `gpt-6.1-sol` · `gemini-3.8-flash` · `gemini3.1-flash` |
+
+## 페이수 다차원 표(Feishu Base) 자동화
+
+1. SKU, 참고 이미지 URL, 지시문, 버전, 모델, 상태, 작업 ID, 결과 열을 만드세요. 첨부 파일에 페이수 로그인이 필요하면 권한 있는 서비스에서 가져온 직접 링크를 쓰고 생성 시간보다 넉넉한 유효 기간을 확보합니다.
+2. ‘제작 승인’이고 작업 ID가 빈 행만 자동화 대상으로 설정하세요. ‘发送 HTTP 请求’(HTTP 요청 보내기)로 위 POST를 보내고, 행 ID·작업 용도·버전으로 고정된 `idempotency_key`를 만듭니다. `request_id`를 해당 행에 기록합니다. API 키는 권한이 제한된 자동화나 자체 서버에서 관리하세요.
+3. 별도 예약 작업에서 ID가 있는 미완료 행을 조회합니다. GET의 `request_id` 쿼리 항목에 기록한 ID를 전달하고 성공 시 `result.url`이나 `result.content`를 같은 행에 적습니다. 장기 보관할 파일은 팀의 자료실로 복사하세요.
+
+## ComfyUI에서 노드 연결
+
+작업 공간의 API 메뉴에서 플러그인을 받은 뒤 `ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/` 바로 아래에 `requirements.txt`가 있도록 압축을 풉니다. ComfyUI가 사용하는 Python 환경에서 해당 패키지를 설치하고 ComfyUI를 재시작한 뒤 브라우저를 새로 고치세요. ‘森智AI’나 ‘NewAPI’를 검색해 설정 노드에 접속 정보를 입력하고 이미지, 텍스트, 텍스트 미리보기 노드를 연결합니다. 워크플로를 공유하기 전 키를 지우고 내보낸 JSON도 확인하세요. [플러그인 및 설치 안내](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+---
+
+## [Español · Senzhi AI (森智 AI) para imágenes de producto, catálogos y vídeo](https://iwkai312.github.io/Senzhi-AI/es.html)
+
+Senzhi AI ayuda a las tiendas en línea y a los equipos que venden en varios países a preparar el material de una ficha de producto. Con las fotos de una misma prenda puedes crear la imagen de catálogo, un detalle del tejido y varias tomas con modelos. Si la colección llega en tres colores, puedes organizar las tres referencias en un solo lote.
+
+[Visitar el sitio oficial](https://www.senzhiai.com/) · [Abrir el espacio de trabajo](https://www.senzhiai.com/workspace.php) · [Guía de la API en español](https://iwkai312.github.io/Senzhi-AI/api-es.html)
+
+## Qué herramienta usar para cada pieza
+
+| Pieza | Cómo prepararla |
+| --- | --- |
+| Foto de catálogo sobre fondo blanco | Sube una foto del artículo y genera una vista sobre fondo blanco. Es una opción para presentar una colección con el mismo tratamiento de fondo y comparar siluetas o colores. |
+| Detalle de producto | Aporta una referencia donde se aprecie lo que quieres mostrar, como una cremallera, un bordado o el puño de una chaqueta. Indica qué zona debe ocupar el primer plano para acompañar la descripción del artículo. |
+| Prueba virtual y sustitución de producto | Combina la foto del producto con una toma de referencia. Puedes preparar una pareja concreta de prenda y modelo, o probar la misma prenda sobre varias personas conservando la pose indicada. |
+| Producto en uso | Parte de una foto y describe un contexto reconocible para quien compra. Un bolso colocado junto a un abrigo, por ejemplo, ayuda a presentar una idea de conjunto. |
+| Ficha de producto y composición | Usa una página de referencia como plantilla para una serie de artículos o asigna una plantilla distinta a cada uno. En el editor de lienzo puedes colocar imágenes y textos y exportar la composición entera o por secciones. |
+| Creatividad de campaña y redes | Explora una escena a partir de un texto o lleva una foto de referencia a una nueva composición. La herramienta para Xiaohongshu (RED) recibe por separado las indicaciones sobre la imagen y sobre el texto de la publicación. |
+| Vídeo corto | Describe el movimiento del artículo o de la cámara y, si el modelo admite referencias, añade tus fotos. Una toma que se acerque al tejido puede complementar las fotos fijas de la ficha. |
+
+## Un lote de 3 prendas y 10 fotos de modelos
+
+1. **Organiza los archivos.** En «批量生图» (generación por lotes), coloca las fotos de tres prendas en la primera columna y diez fotos de modelos en la segunda. Puedes incorporar carpetas completas y reordenar las columnas o las fotos en la vista previa. La numeración de las imágenes sigue el orden de las columnas.
+2. **Elige el emparejamiento.** Con «全部组合» (todas las combinaciones) cada prenda se combina con cada modelo, para un total de **30 grupos**. Si el equipo de catálogo ya ha asignado una foto de modelo a cada prenda, elige el emparejamiento por orden. La primera foto de cada columna formará la primera fila.
+3. **Escribe la instrucción común.** Por ejemplo, «Pon la prenda de la imagen 1 a la persona de la imagen 2. Conserva el cuello y la textura del punto, así como la pose y el fondo de la segunda foto». Activa la optimización por grupo si quieres que la instrucción se adapte a las referencias de cada pareja.
+4. **Revisa el coste y la hora.** Comprueba el número de grupos y los créditos estimados antes de confirmar. Para ejecutar el lote más tarde, programa una hora y termina de subir los archivos. Si has activado la optimización, las instrucciones se preparan una vez confirmado el lote completo y la generación de imágenes empieza a partir de la hora programada. Una vez confirmada la carga, puedes apagar el equipo.
+
+Si el fondo se repite en todo un catálogo, añade una columna de **imágenes fijas** al emparejar por orden. Una sola referencia se usa en cada fila. Varias referencias se reutilizan en el orden elegido y vuelven a empezar al agotarse. [Abrir la generación por lotes](https://www.senzhiai.com/workspace.php?tool=folder_batch)
+
+## Modelos, resolución y originales
+
+Para imagen, el catálogo de Senzhi AI incluye opciones como `nano-banana-pro`, `nano-banana-2`, `nano-banana-2.1`, variantes VIP de GPT Image 2.5 (Sunburst y Flare) y GPT Image 2.0 VIP. En vídeo, MiniMax H3 admite hasta nueve imágenes de referencia y resolución de hasta 1080p. Agnes Video 2.5 admite hasta cinco imágenes y resolución de hasta 2K. Comprueba los modelos, formatos y precios que aparecen en tu cuenta para la herramienta elegida.
+
+Para optimizar instrucciones puedes elegir `gpt-6.1-sol` o `gemini-3.8-flash`. Si preparas varias prendas del mismo corte en distintos colores, el modelo puede adaptar la instrucción común a las fotos de cada grupo.
+
+Al seleccionar 4K en un modelo compatible, Senzhi AI solicita la generación en ese modo y entrega el archivo original que devuelve el modelo. La plataforma no amplía una imagen de menor resolución para venderla como 4K. Descarga el archivo desde la biblioteca de imágenes para comprobar sus dimensiones en píxeles, revisar el color y comparar los detalles con la prenda real. Puedes filtrar los resultados por herramienta y descargar solo las tomas aprobadas en un ZIP. El plazo de conservación anunciado es de cinco días. Guarda los originales que quieras reutilizar.
+
+Hasta el 6 de noviembre de 2026, más de 40 cuentas de usuario, excluidas las de administración, habían completado al menos una generación. El historial muestra el estado de cada grupo por separado. Si se interrumpe la consulta, el sistema vuelve a comprobar la tarea original. Un grupo con un fallo confirmado puede reintentarse sin volver a enviar los que ya han terminado. También puedes configurar un modelo de reserva al preparar el lote.
+
+## API, Feishu Base y ComfyUI
+
+La API permite solicitar imágenes y texto desde tu propio catálogo o aplicación. El 6 de noviembre de 2026, el catálogo de la API mostraba nueve entradas de imagen y tres de texto, entre ellas `gemini3.1-flash`. El protocolo también contempla vídeo. Actualmente, los modelos de vídeo se utilizan desde el espacio de trabajo web. Consulta la lista con la clave de tu cuenta para conocer los parámetros y precios disponibles. Asocia el `request_id` de cada solicitud con la referencia del producto para devolver el resultado al SKU correcto.
+
+- **Feishu Base (飞书多维表格).** Prepara columnas para SKU, URL de referencia, instrucciones, `request_id` y resultado. Configura el paso «发送 HTTP 请求» (enviar una solicitud HTTP) en tu automatización, guarda el identificador y escribe el resultado en la misma fila al confirmar que la tarea ha terminado. Guarda la clave en la configuración de una automatización con acceso restringido o en tu servidor.
+- **ComfyUI.** En la sección de API del espacio de trabajo encontrarás el complemento y sus instrucciones de instalación. Extrae la carpeta del complemento en `ComfyUI/custom_nodes/`, instala las dependencias que indica la guía y reinicia ComfyUI. Busca «森智AI» o «NewAPI» para encontrar los nodos de imagen, texto, vista previa del texto y configuración. Borra la clave antes de compartir el archivo del flujo de trabajo.
+
+[Guía de la API en español](https://iwkai312.github.io/Senzhi-AI/api-es.html) · [Guía de la API en chino](https://iwkai312.github.io/Senzhi-AI/api-zh.html) · [Modelos y complemento ComfyUI](https://www.senzhiai.com/workspace.php?tool=open_api)
+
+---
+
+## [Español · Guía de desarrollo de Senzhi AI · API, Feishu Base y ComfyUI](https://iwkai312.github.io/Senzhi-AI/api-es.html)
+
+Automatiza una tarea de catálogo a partir de una fila con un SKU y una foto. Esta guía muestra cómo elegir un modelo, encargar una imagen con fondo blanco y guardar el original para devolver el resultado a la ficha de ese mismo artículo.
+
+[Gestionar claves de API](https://www.senzhiai.com/workspace.php?tool=open_api) · [Guía del producto y de la generación por lotes](https://iwkai312.github.io/Senzhi-AI/es.html) · [English](https://iwkai312.github.io/Senzhi-AI/api-en.html)
+
+## 1. Consulta el catálogo de tu cuenta
+
+Entra en el espacio de trabajo y crea una clave en el apartado de acceso a la API. Los ejemplos de Bash y curl toman la clave de la variable de entorno `SENZHI_API_KEY` de tu servidor. Envía la clave en la cabecera `Authorization: Bearer <key>` o `X-API-Key`.
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  'https://www.senzhiai.com/api/open_models.php?type=image'
+```
+
+El filtro `type` acepta `image`, `text` o `video`. Omítelo para consultar todos los tipos. La consulta es gratuita. Dentro de `models`, elige un modelo y revisa sus campos `pricing` y `request_example`. El identificador de Senzhi se indica en `model_id`, por ejemplo `db:123`. Para buscar por nombre, usa `model_name` en lugar del identificador y copia el nombre tal como aparece en el catálogo, respetando mayúsculas y minúsculas. Si dos entradas comparten nombre, recibirás `409 AMBIGUOUS_MODEL`. En ese caso, indica el ID.
+
+## 2. Solicita una foto para el catálogo
+
+Guarda el siguiente JSON como `request.json`. Sustituye la URL de ejemplo por un enlace HTTPS directo a tu propia imagen que Senzhi pueda leer. El orden de `images` define qué foto es la imagen 1 o la imagen 2. Si cambias de modelo, incorpora los campos obligatorios de su `request_example`.
+
+```json
+{
+  "model_name": "nano-banana-pro",
+  "prompt": "Crea una foto frontal sobre fondo blanco de la chaqueta de punto color crema de la imagen 1. Conserva el cuello, los botones y el canalé de los puños.",
+  "images": [
+    "https://example.com/products/knit-01.jpg"
+  ],
+  "idempotency_key": "catalog-knit-01-white-v1"
+}
+```
+
+```bash
+curl --silent --show-error \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json \
+  'https://www.senzhiai.com/api/open_generate.php'
+```
+
+Cada petición crea una tarea y `n` vale 1. Guarda el `request_id` de la respuesta, por ejemplo `{"success":true,"request_id":"req_example","status":"queued"}`. Usa un nuevo `idempotency_key` para cada trabajo nuevo. Si pierdes la conexión antes de recibir el ID, vuelve a enviar **el mismo cuerpo, con la misma clave de API y la misma clave de idempotencia** para recuperar el trabajo que pudo haberse aceptado.
+
+## 3. Consulta la tarea y guarda el original
+
+Sustituye `req_example` por el ID recibido. Realiza la consulta con la misma clave de API con la que creaste la tarea.
+
+```bash
+curl --silent --show-error --get \
+  -H "Authorization: Bearer $SENZHI_API_KEY" \
+  --data-urlencode 'request_id=req_example' \
+  'https://www.senzhiai.com/api/open_result.php'
+```
+
+| Valor de `status` en el JSON | Qué hacer |
+| --- | --- |
+| `pending` / `queued` / `processing` | Espera de 5 a 10 segundos y consulta de nuevo. Si recibes `Retry-After` o `retry_after`, respeta el plazo indicado. |
+| `success` | Lee `result.url` para imágenes y vídeos, o `result.content` para texto. Descarga enseguida el archivo original conservando todos los parámetros de la URL. |
+| `failed` | Registra `error.code` y `error.message` y revisa el motivo. |
+
+Si una consulta supera el tiempo de espera o devuelve `503 MEDIA_UNAVAILABLE`, continúa consultando el ID original. `410 MEDIA_EXPIRED` indica que ha vencido el plazo de conservación. Para descargar, envía únicamente la URL de `result.url` al servidor del archivo. Utiliza la clave de Senzhi exclusivamente en las peticiones al dominio de su API.
+
+## Cómo elegir los parámetros de cada modelo
+
+- **Imagen.** Consulta `parameter_combinations` y `parameters` para elegir una combinación de resolución, proporción, calidad y formato. Para generar en 4K, confirma que la combinación elegida ofrece esa resolución.
+- **Texto.** Incluye en `prompt` los datos verificados del producto, el idioma y la extensión. Puedes usar `system_prompt` para especificar el tono de la marca. Antes de adjuntar fotos, comprueba que el modelo admite imágenes y cuántas permite.
+- **Vídeo.** Podrás solicitarlo cuando el catálogo `type=video` de tu cuenta incluya un modelo. El 6 de noviembre de 2026, los catálogos consultados tenían la lista de vídeo vacía. MiniMax H3 y Agnes Video 2.5 estaban disponibles en el espacio de trabajo web. Para un modelo de vídeo de la API, consulta `video_capabilities`, conserva `options.pricing_version` del ejemplo y calcula el coste multiplicando la tarifa de la resolución elegida por la duración en segundos.
+
+### Redacta un punto de venta para una ficha en inglés
+
+Guarda este cuerpo como `request.json` y reutiliza las llamadas de envío y consulta del ejemplo de imagen. Sustituye la clave de idempotencia por una propia de esta nueva tarea y consérvala si necesitas reintentar el mismo envío. Cuando el estado sea `success`, lee el texto en `result.content`.
+
+```json
+{
+  "model_name": "gpt-6.1-sol",
+  "prompt": "Escribe en inglés una frase de hasta 20 palabras para una ficha de producto. Usa solo estos hechos verificados: es una chaqueta de punto color crema y tiene cuatro botones delanteros.",
+  "idempotency_key": "catalog-knit-01-copy-en-v1"
+}
+```
+
+### Nombres de modelos verificados el 6 de noviembre de 2026
+
+Para usar `model_name`, copia el nombre con las mayúsculas, espacios y paréntesis del catálogo. Antes de enviar una tarea, consulta el catálogo actualizado de tu cuenta.
+
+| Tipo | Nombre en el catálogo |
+| --- | --- |
+| Imagen | `nano-banana-pro` · `nano-banana-pro-vip（谷歌官方）` · `Nano Banana Pro【VIP】` |
+| Imagen | `nano-banana-2` · `nano-banana-2.1` · `Nano-banana-2.1【VIP】` |
+| Imagen | `GPT-image-2.5-sunburst【VIP】` · `GPT-image-2.5-flare【VIP】` · `GPT Image 2.0【VIP】` |
+| Texto | `gpt-6.1-sol` · `gemini-3.8-flash` · `gemini3.1-flash` |
+
+## Feishu Base · vincula la tarea a la fila del SKU
+
+1. Crea campos para SKU, versión, imagen de referencia, instrucción, modelo, estado, ID de tarea y resultado. Si el archivo adjunto requiere iniciar sesión en Feishu, obtén mediante un servicio autorizado un enlace directo que Senzhi pueda leer y que siga vigente durante el procesamiento.
+2. Cuando se apruebe una fila y el ID esté vacío, usa la acción «发送 HTTP 请求» (enviar una solicitud HTTP) para hacer el POST anterior. Combina el ID de la fila, el uso previsto y la versión para formar un `idempotency_key` estable. Guarda la clave en una automatización de acceso restringido o en tu servidor. Escribe el `request_id` en la fila correspondiente.
+3. En otro flujo programado, selecciona las filas pendientes que ya tienen ID y envía un GET con ese ID en el parámetro de consulta `request_id`. Guarda `result.url` o `result.content` cuando finalice. Para conservar el archivo, descárgalo en la biblioteca de tu equipo.
+
+## ComfyUI · conecta las imágenes y el texto a tus nodos
+
+Descarga el complemento del espacio de trabajo y extráelo de modo que `requirements.txt` quede directamente dentro de `ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/`. Instala las dependencias con el entorno de Python que utiliza ComfyUI, reinicia el programa y actualiza el navegador. Busca `森智AI` o `NewAPI` para encontrar los nodos de configuración, imagen, texto y vista previa de texto. Configura el servicio y la clave en el nodo de conexión. Antes de compartir el flujo, borra la clave y revisa el JSON exportado. [Complemento e instrucciones de instalación](https://www.senzhiai.com/workspace.php?tool=open_api)

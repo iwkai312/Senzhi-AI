@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guía de desarrollo de Senzhi AI · API, Feishu Base y ComfyUI</title><meta name="description" content="Automatiza una tarea de catálogo a partir de una fila con un SKU y una foto. Esta guía muestra cómo elegir un modelo, encargar una imagen con fondo blanco y guardar el original para devolver el…"><link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/api-es.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html">
+<link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html">
+<link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html">
+<link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html">
+<link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html">
+<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"><meta property="og:type" content="article"><meta property="og:title" content="Guía de desarrollo de Senzhi AI · API, Feishu Base y ComfyUI"><meta property="og:description" content="Automatiza una tarea de catálogo a partir de una fila con un SKU y una foto. Esta guía muestra cómo elegir un modelo, encargar una imagen con fondo blanco y guardar el original para devolver el…"><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/api-es.html"><meta property="og:image" content="https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"><link rel="icon" href="assets/senzhi-logo.png"><link rel="stylesheet" href="assets/guide.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Guía de desarrollo de Senzhi AI · API, Feishu Base y ComfyUI","inLanguage":"es","url":"https://iwkai312.github.io/Senzhi-AI/api-es.html","description":"Automatiza una tarea de catálogo a partir de una fila con un SKU y una foto. Esta guía muestra cómo elegir un modelo, encargar una imagen con fondo blanco y guardar el original para devolver el resultado a la ficha de ese mismo artículo.","publisher":{"@type":"Organization","name":"森智 AI · Senzhi AI","url":"https://www.senzhiai.com/"}}</script></head>
+<body><header><div class="shell mast"><a class="brand" href="https://www.senzhiai.com/"><img src="assets/senzhi-logo.png" width="32" height="32" alt="">森智 AI <span>/</span> Senzhi AI</a><nav class="languages" aria-label="Elegir idioma"><a lang="zh-Hans" hreflang="zh-Hans" href="api-zh.html">简体中文</a><a lang="en" hreflang="en" href="api-en.html">English</a><a lang="ja" hreflang="ja" href="api-ja.html">日本語</a><a lang="ko" hreflang="ko" href="api-ko.html">한국어</a><a lang="es" hreflang="es" href="api-es.html" aria-current="page">Español</a></nav></div></header>
+<main><div class="shell"><div class="hero api-hero"><div class="hero-copy"><div class="kind"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg>Guía de API</div><h1>Guía de desarrollo de Senzhi AI · API, Feishu Base y <span class="term">ComfyUI</span></h1><p>Automatiza una tarea de catálogo a partir de una fila con un SKU y una foto. Esta guía muestra cómo elegir un modelo, encargar una imagen con fondo blanco y guardar el original para devolver el resultado a la ficha de ese mismo artículo.</p><div class="actions"><a class="primary" href="https://www.senzhiai.com/workspace.php?tool=open_api">Obtener una clave API <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="secondary" href="es.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5c3.3-1.4 6.5-1.1 9 1.1 2.5-2.2 5.7-2.5 9-1.1v13.1c-3.2-1.3-6.3-.9-9 1.1-2.7-2-5.8-2.4-9-1.1zM12 6.6v13"/></svg>Guía de producto</a></div></div></div>
+<div class="layout"><aside><div class="toc"><strong><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>En esta página</strong><a href="#section-1">1. Consulta el catálogo de tu cuenta</a><a href="#section-2">2. Solicita una foto para el catálogo</a><a href="#section-3">3. Consulta la tarea y guarda el original</a><a href="#section-4">Cómo elegir los parámetros de cada modelo</a><a href="#section-5">Feishu Base · vincula la tarea a la fila del SKU</a><a href="#section-6">ComfyUI · conecta las imágenes y el texto a tus nodos</a></div><details><summary>En esta página</summary><a href="#section-1">1. Consulta el catálogo de tu cuenta</a><a href="#section-2">2. Solicita una foto para el catálogo</a><a href="#section-3">3. Consulta la tarea y guarda el original</a><a href="#section-4">Cómo elegir los parámetros de cada modelo</a><a href="#section-5">Feishu Base · vincula la tarea a la fila del SKU</a><a href="#section-6">ComfyUI · conecta las imágenes y el texto a tus nodos</a></details></aside><article><section class="chapter" id="section-1"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>1. Consulta el catálogo de tu cuenta</h2><p>Entra en el espacio de trabajo y crea una clave en el apartado de acceso a la API. Los ejemplos de Bash y curl toman la clave de la variable de entorno <code>SENZHI_API_KEY</code> de tu servidor. Envía la clave en la cabecera <code>Authorization: Bearer &lt;key&gt;</code> o <code>X-API-Key</code>.</p>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  &#39;https://www.senzhiai.com/api/open_models.php?type=image&#39;
+</code></pre>
+<p>El filtro <code>type</code> acepta <code>image</code>, <code>text</code> o <code>video</code>. Omítelo para consultar todos los tipos. La consulta es gratuita. Dentro de <code>models</code>, elige un modelo y revisa sus campos <code>pricing</code> y <code>request_example</code>. El identificador de Senzhi se indica en <code>model_id</code>, por ejemplo <code>db:123</code>. Para buscar por nombre, usa <code>model_name</code> en lugar del identificador y copia el nombre tal como aparece en el catálogo, respetando mayúsculas y minúsculas. Si dos entradas comparten nombre, recibirás <code>409 AMBIGUOUS_MODEL</code>. En ese caso, indica el ID.</p>
+</section>
+<section class="chapter" id="section-2"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>2. Solicita una foto para el catálogo</h2><p>Guarda el siguiente JSON como <code>request.json</code>. Sustituye la URL de ejemplo por un enlace HTTPS directo a tu propia imagen que Senzhi pueda leer. El orden de <code>images</code> define qué foto es la imagen 1 o la imagen 2. Si cambias de modelo, incorpora los campos obligatorios de su <code>request_example</code>.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;nano-banana-pro&quot;,
+  &quot;prompt&quot;: &quot;Crea una foto frontal sobre fondo blanco de la chaqueta de punto color crema de la imagen 1. Conserva el cuello, los botones y el canalé de los puños.&quot;,
+  &quot;images&quot;: [
+    &quot;https://example.com/products/knit-01.jpg&quot;
+  ],
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-white-v1&quot;
+}
+</code></pre>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  -H &#39;Content-Type: application/json&#39; \
+  --data-binary @request.json \
+  &#39;https://www.senzhiai.com/api/open_generate.php&#39;
+</code></pre>
+<p>Cada petición crea una tarea y <code>n</code> vale 1. Guarda el <code>request_id</code> de la respuesta, por ejemplo <code>{&quot;success&quot;:true,&quot;request_id&quot;:&quot;req_example&quot;,&quot;status&quot;:&quot;queued&quot;}</code>. Usa un nuevo <code>idempotency_key</code> para cada trabajo nuevo. Si pierdes la conexión antes de recibir el ID, vuelve a enviar <strong>el mismo cuerpo, con la misma clave de API y la misma clave de idempotencia</strong> para recuperar el trabajo que pudo haberse aceptado.</p>
+</section>
+<section class="chapter" id="section-3"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span>3. Consulta la tarea y guarda el original</h2><p>Sustituye <code>req_example</code> por el ID recibido. Realiza la consulta con la misma clave de API con la que creaste la tarea.</p>
+<pre><code class="language-bash">curl --silent --show-error --get \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  --data-urlencode &#39;request_id=req_example&#39; \
+  &#39;https://www.senzhiai.com/api/open_result.php&#39;
+</code></pre>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Valor de <code>status</code> en el JSON</th>
+<th>Qué hacer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code> / <code>queued</code> / <code>processing</code></td>
+<td>Espera de 5 a 10 segundos y consulta de nuevo. Si recibes <code>Retry-After</code> o <code>retry_after</code>, respeta el plazo indicado.</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>Lee <code>result.url</code> para imágenes y vídeos, o <code>result.content</code> para texto. Descarga enseguida el archivo original conservando todos los parámetros de la URL.</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Registra <code>error.code</code> y <code>error.message</code> y revisa el motivo.</td>
+</tr>
+</tbody></table></div>
+<p>Si una consulta supera el tiempo de espera o devuelve <code>503 MEDIA_UNAVAILABLE</code>, continúa consultando el ID original. <code>410 MEDIA_EXPIRED</code> indica que ha vencido el plazo de conservación. Para descargar, envía únicamente la URL de <code>result.url</code> al servidor del archivo. Utiliza la clave de Senzhi exclusivamente en las peticiones al dominio de su API.</p>
+</section>
+<section class="chapter" id="section-4"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg></span>Cómo elegir los parámetros de cada modelo</h2><ul>
+<li><strong>Imagen.</strong> Consulta <code>parameter_combinations</code> y <code>parameters</code> para elegir una combinación de resolución, proporción, calidad y formato. Para generar en 4K, confirma que la combinación elegida ofrece esa resolución.</li>
+<li><strong>Texto.</strong> Incluye en <code>prompt</code> los datos verificados del producto, el idioma y la extensión. Puedes usar <code>system_prompt</code> para especificar el tono de la marca. Antes de adjuntar fotos, comprueba que el modelo admite imágenes y cuántas permite.</li>
+<li><strong>Vídeo.</strong> Podrás solicitarlo cuando el catálogo <code>type=video</code> de tu cuenta incluya un modelo. El 6 de noviembre de 2026, los catálogos consultados tenían la lista de vídeo vacía. MiniMax H3 y Agnes Video 2.5 estaban disponibles en el espacio de trabajo web. Para un modelo de vídeo de la API, consulta <code>video_capabilities</code>, conserva <code>options.pricing_version</code> del ejemplo y calcula el coste multiplicando la tarifa de la resolución elegida por la duración en segundos.</li>
+</ul>
+<h3>Redacta un punto de venta para una ficha en inglés</h3>
+<p>Guarda este cuerpo como <code>request.json</code> y reutiliza las llamadas de envío y consulta del ejemplo de imagen. Sustituye la clave de idempotencia por una propia de esta nueva tarea y consérvala si necesitas reintentar el mismo envío. Cuando el estado sea <code>success</code>, lee el texto en <code>result.content</code>.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;gpt-6.1-sol&quot;,
+  &quot;prompt&quot;: &quot;Escribe en inglés una frase de hasta 20 palabras para una ficha de producto. Usa solo estos hechos verificados: es una chaqueta de punto color crema y tiene cuatro botones delanteros.&quot;,
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-copy-en-v1&quot;
+}
+</code></pre>
+<h3>Nombres de modelos verificados el 6 de noviembre de 2026</h3>
+<p>Para usar <code>model_name</code>, copia el nombre con las mayúsculas, espacios y paréntesis del catálogo. Antes de enviar una tarea, consulta el catálogo actualizado de tu cuenta.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Nombre en el catálogo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Imagen</td>
+<td><code>nano-banana-pro</code> · <code>nano-banana-pro-vip（谷歌官方）</code> · <code>Nano Banana Pro【VIP】</code></td>
+</tr>
+<tr>
+<td>Imagen</td>
+<td><code>nano-banana-2</code> · <code>nano-banana-2.1</code> · <code>Nano-banana-2.1【VIP】</code></td>
+</tr>
+<tr>
+<td>Imagen</td>
+<td><code>GPT-image-2.5-sunburst【VIP】</code> · <code>GPT-image-2.5-flare【VIP】</code> · <code>GPT Image 2.0【VIP】</code></td>
+</tr>
+<tr>
+<td>Texto</td>
+<td><code>gpt-6.1-sol</code> · <code>gemini-3.8-flash</code> · <code>gemini3.1-flash</code></td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="chapter" id="section-5"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>Feishu Base · vincula la tarea a la fila del SKU</h2><ol>
+<li>Crea campos para SKU, versión, imagen de referencia, instrucción, modelo, estado, ID de tarea y resultado. Si el archivo adjunto requiere iniciar sesión en Feishu, obtén mediante un servicio autorizado un enlace directo que Senzhi pueda leer y que siga vigente durante el procesamiento.</li>
+<li>Cuando se apruebe una fila y el ID esté vacío, usa la acción «发送 HTTP 请求» (enviar una solicitud HTTP) para hacer el POST anterior. Combina el ID de la fila, el uso previsto y la versión para formar un <code>idempotency_key</code> estable. Guarda la clave en una automatización de acceso restringido o en tu servidor. Escribe el <code>request_id</code> en la fila correspondiente.</li>
+<li>En otro flujo programado, selecciona las filas pendientes que ya tienen ID y envía un GET con ese ID en el parámetro de consulta <code>request_id</code>. Guarda <code>result.url</code> o <code>result.content</code> cuando finalice. Para conservar el archivo, descárgalo en la biblioteca de tu equipo.</li>
+</ol>
+</section>
+<section class="chapter" id="section-6"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>ComfyUI · conecta las imágenes y el texto a tus nodos</h2><p>Descarga el complemento del espacio de trabajo y extráelo de modo que <code>requirements.txt</code> quede directamente dentro de <code>ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/</code>. Instala las dependencias con el entorno de Python que utiliza ComfyUI, reinicia el programa y actualiza el navegador. Busca <code>森智AI</code> o <code>NewAPI</code> para encontrar los nodos de configuración, imagen, texto y vista previa de texto. Configura el servicio y la clave en el nodo de conexión. Antes de compartir el flujo, borra la clave y revisa el JSON exportado. <a href="https://www.senzhiai.com/workspace.php?tool=open_api">Complemento e instrucciones de instalación</a></p>
+</section></article></div></div></main>
+<footer><div class="shell"><a href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/docs/api-es.md">Ver en GitHub ↗</a></div></footer></body></html>

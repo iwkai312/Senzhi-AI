@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Senzhi AI developer guide · API, Feishu Base and ComfyUI</title><meta name="description" content="Use a catalog row to request a white-background packshot and a short listing description based on verified product facts. Each job returns a request ID, so the merchandising team can write the approved…"><link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/api-en.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html">
+<link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html">
+<link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html">
+<link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html">
+<link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html">
+<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"><meta property="og:type" content="article"><meta property="og:title" content="Senzhi AI developer guide · API, Feishu Base and ComfyUI"><meta property="og:description" content="Use a catalog row to request a white-background packshot and a short listing description based on verified product facts. Each job returns a request ID, so the merchandising team can write the approved…"><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/api-en.html"><meta property="og:image" content="https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"><link rel="icon" href="assets/senzhi-logo.png"><link rel="stylesheet" href="assets/guide.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Senzhi AI developer guide · API, Feishu Base and ComfyUI","inLanguage":"en","url":"https://iwkai312.github.io/Senzhi-AI/api-en.html","description":"Use a catalog row to request a white-background packshot and a short listing description based on verified product facts. Each job returns a request ID, so the merchandising team can write the approved image and copy back to the correct SKU.","publisher":{"@type":"Organization","name":"森智 AI · Senzhi AI","url":"https://www.senzhiai.com/"}}</script></head>
+<body><header><div class="shell mast"><a class="brand" href="https://www.senzhiai.com/"><img src="assets/senzhi-logo.png" width="32" height="32" alt="">森智 AI <span>/</span> Senzhi AI</a><nav class="languages" aria-label="Choose a language"><a lang="zh-Hans" hreflang="zh-Hans" href="api-zh.html">简体中文</a><a lang="en" hreflang="en" href="api-en.html" aria-current="page">English</a><a lang="ja" hreflang="ja" href="api-ja.html">日本語</a><a lang="ko" hreflang="ko" href="api-ko.html">한국어</a><a lang="es" hreflang="es" href="api-es.html">Español</a></nav></div></header>
+<main><div class="shell"><div class="hero api-hero"><div class="hero-copy"><div class="kind"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg>Developer guide</div><h1>Senzhi AI developer guide · API, Feishu Base and <span class="term">ComfyUI</span></h1><p>Use a catalog row to request a white-background packshot and a short listing description based on verified product facts. Each job returns a request ID, so the merchandising team can write the approved image and copy back to the correct SKU.</p><div class="actions"><a class="primary" href="https://www.senzhiai.com/workspace.php?tool=open_api">Get an API key <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="secondary" href="en.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5c3.3-1.4 6.5-1.1 9 1.1 2.5-2.2 5.7-2.5 9-1.1v13.1c-3.2-1.3-6.3-.9-9 1.1-2.7-2-5.8-2.4-9-1.1zM12 6.6v13"/></svg>Product guide</a></div></div></div>
+<div class="layout"><aside><div class="toc"><strong><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>On this page</strong><a href="#section-1">Three API calls from model selection to delivery</a><a href="#section-2">Choosing parameters for images, text and video</a><a href="#section-3">Feishu Base · start a job from a SKU row</a><a href="#section-4">ComfyUI · use Senzhi in a node workflow</a></div><details><summary>On this page</summary><a href="#section-1">Three API calls from model selection to delivery</a><a href="#section-2">Choosing parameters for images, text and video</a><a href="#section-3">Feishu Base · start a job from a SKU row</a><a href="#section-4">ComfyUI · use Senzhi in a node workflow</a></details></aside><article><section class="chapter" id="section-1"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>Three API calls from model selection to delivery</h2><p>Use <code>https://www.senzhiai.com</code> as the base URL. Sign in to the workspace and create a key under API access. Send it from your server in the <code>Authorization: Bearer &lt;key&gt;</code> header or the <code>X-API-Key</code> header. The Bash and curl examples below read the key from the <code>SENZHI_API_KEY</code> environment variable.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Method and path</th>
+<th>What to keep</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discover models</td>
+<td><code>GET /api/open_models.php</code></td>
+<td>Model reference, supported parameters, pricing and example request</td>
+</tr>
+<tr>
+<td>Create a job</td>
+<td><code>POST /api/open_generate.php</code></td>
+<td>The returned <code>request_id</code></td>
+</tr>
+<tr>
+<td>Retrieve a result</td>
+<td><code>GET /api/open_result.php?request_id=...</code></td>
+<td>An image or video file URL, or generated text</td>
+</tr>
+</tbody></table></div>
+<h3>1. Read the model catalog for your account</h3>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  &#39;https://www.senzhiai.com/api/open_models.php?type=image&#39;
+</code></pre>
+<p>Set <code>type</code> to <code>image</code>, <code>text</code> or <code>video</code>, or omit it to list all available types. Reading the catalog is free. Choose an entry under <code>models</code>, check <code>pricing</code> and copy its <code>request_example</code>. The example uses a Senzhi <code>model_id</code> such as <code>db:123</code>. To select by display name, replace that field with <code>model_name</code> and use the exact spelling and capitalization. If the account has two models with the same name, the API returns <code>409 AMBIGUOUS_MODEL</code>. Select the intended model by ID.</p>
+<h3>2. Submit a white-background packshot</h3>
+<p>Save the JSON below as <code>request.json</code>. This example selects <code>nano-banana-pro</code> by name. Check that it appears in your account’s catalog, then replace the example image URL with your own. If you choose a different model, carry over its required options from <code>request_example</code>. Use a direct HTTPS image URL accessible to Senzhi. The order of <code>images</code> determines which reference your prompt calls image 1 or image 2.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;nano-banana-pro&quot;,
+  &quot;prompt&quot;: &quot;Create a front-facing white-background packshot of the cream cardigan in image 1. Preserve the collar, buttons and ribbed cuffs.&quot;,
+  &quot;images&quot;: [&quot;https://example.com/products/knit-01.jpg&quot;],
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-white-v1&quot;
+}
+</code></pre>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  -H &#39;Content-Type: application/json&#39; \
+  --data-binary @request.json \
+  &#39;https://www.senzhiai.com/api/open_generate.php&#39;
+</code></pre>
+<p>One request creates one job and <code>n</code> is fixed at 1. Save the returned <code>request_id</code>. For example, <code>{&quot;success&quot;:true,&quot;request_id&quot;:&quot;req_example&quot;,&quot;status&quot;:&quot;queued&quot;}</code> means the job is in the queue. Assign a new <code>idempotency_key</code> to each new job. If the connection drops before an ID arrives, repeat the <strong>same request body with the same API key and idempotency key</strong> to recover the accepted job.</p>
+<h3>3. Poll the original job and save its output</h3>
+<pre><code class="language-bash">curl --silent --show-error --get \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  --data-urlencode &#39;request_id=req_example&#39; \
+  &#39;https://www.senzhiai.com/api/open_result.php&#39;
+</code></pre>
+<p>Replace <code>req_example</code> with the ID from the previous call and use the API key that created the job. Check the JSON <code>status</code> field on each response.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Job status</th>
+<th>Client action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code>, <code>queued</code>, <code>processing</code></td>
+<td>Poll again in 5–10 seconds. Follow <code>Retry-After</code> or <code>retry_after</code> when provided.</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>Download the original image or video from <code>result.url</code> promptly. Read generated text from <code>result.content</code>.</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Record <code>error.code</code> and <code>error.message</code>. Review the cause before creating another job.</td>
+</tr>
+</tbody></table></div>
+<p>For a file download, set <code>RESULT_URL</code> to the full <code>result.url</code>, preserving its query string. For PNG output, run <code>curl --fail --location --proto &#39;=https&#39; --proto-redir &#39;=https&#39; --output knit-01.png &quot;$RESULT_URL&quot;</code>. Send only the file URL to the download host. The Senzhi API key belongs on requests to the Senzhi API domain.</p>
+<p>After you have an ID, keep querying that job if polling times out or returns <code>503 MEDIA_UNAVAILABLE</code>. A <code>410 MEDIA_EXPIRED</code> response means the output has passed its retention period.</p>
+</section>
+<section class="chapter" id="section-2"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Choosing parameters for images, text and video</h2><p>On November 6, 2026, the standard and VIP account catalogs checked on the live site listed image and text models. The video workspace also offered MiniMax H3 and Agnes Video 2.5. The API supports video jobs once a model appears in your account’s <code>type=video</code> catalog. The video lists checked on that date were empty.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Catalog task</th>
+<th>Fields to check</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Images · generate a hero image and a detail shot</td>
+<td>Read <code>parameter_combinations</code> and <code>parameters</code>. Pick supported values for <code>options.resolution</code>, <code>aspect_ratio</code>, <code>quality</code> and <code>format</code>. For 4K, confirm the chosen combination offers that resolution.</td>
+</tr>
+<tr>
+<td>Text · write multilingual listings from product facts</td>
+<td>Put the language, length and verified facts in <code>prompt</code>. An optional <code>system_prompt</code> can set brand voice. Check image input support and the maximum image count before adding references.</td>
+</tr>
+<tr>
+<td>Video · create a vertical clip for a product listing</td>
+<td>Start with the video model’s <code>request_example</code>. Read <code>video_capabilities</code> for duration, resolution, aspect ratio and reference images. Keep <code>options.pricing_version</code>. Multiply the rate for the chosen resolution by the duration in seconds. If the price version changes, refresh the catalog and review the new quote.</td>
+</tr>
+</tbody></table></div>
+<h3>Generate a product bullet for an overseas listing</h3>
+<p>Save this body as <code>request.json</code> and reuse the POST and polling commands above. Replace the idempotency key with one specific to this new job, and retain it if you retry the same submission. When the status is <code>success</code>, read the copy from <code>result.content</code>.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;gpt-6.1-sol&quot;,
+  &quot;prompt&quot;: &quot;Write one product bullet in English, up to 20 words. Verified details: this is a cream knit cardigan with four front buttons. Use only those facts.&quot;,
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-copy-en-v1&quot;
+}
+</code></pre>
+<h3>Model display names verified on 6 November 2026</h3>
+<p>Copy the exact capitalization, spaces and brackets when using <code>model_name</code>. Query your own live catalog before submitting.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Names as shown in the catalog</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Image</td>
+<td><code>nano-banana-pro</code> · <code>nano-banana-pro-vip（谷歌官方）</code> · <code>Nano Banana Pro【VIP】</code></td>
+</tr>
+<tr>
+<td>Image</td>
+<td><code>nano-banana-2</code> · <code>nano-banana-2.1</code> · <code>Nano-banana-2.1【VIP】</code></td>
+</tr>
+<tr>
+<td>Image</td>
+<td><code>GPT-image-2.5-sunburst【VIP】</code> · <code>GPT-image-2.5-flare【VIP】</code> · <code>GPT Image 2.0【VIP】</code></td>
+</tr>
+<tr>
+<td>Text</td>
+<td><code>gpt-6.1-sol</code> · <code>gemini-3.8-flash</code> · <code>gemini3.1-flash</code></td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="chapter" id="section-3"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>Feishu Base · start a job from a SKU row</h2><p>Give a merchandiser a “Ready” status they can set when the brief and reference photo are approved. In Feishu Base, build the following workflow with the <strong>Send HTTP request</strong> automation action. <a href="https://www.feishu.cn/hc/zh-CN/articles/410063847664">Feishu’s HTTP action guide</a></p>
+<ol>
+<li><strong>Set up fields.</strong> Add SKU, brief version, reference image URL, prompt, model ID, status, request ID and output URL. If the photo requires a Feishu login, use an authorized service to obtain a direct link accessible to Senzhi, with enough validity for processing.</li>
+<li><strong>Submit once.</strong> Trigger the POST when a row enters “Ready” and its request ID is empty. Combine the record ID, task purpose and version into a stable idempotency key. Store the API key in restricted automation settings or on your own server. Parse the response as JSON, write the returned request ID to the row and set the status to “Processing.”</li>
+<li><strong>Collect results separately.</strong> Schedule a second workflow for unfinished rows with a request ID. Set the request URL to <code>https://www.senzhiai.com/api/open_result.php</code>. Add <code>request_id</code> in Feishu’s query parameter fields and map it to the row. On success, save <code>result.url</code> or <code>result.content</code>. On failure, save the error. For long-term storage, download originals into your team’s library and keep its permanent link in the row.</li>
+</ol>
+</section>
+<section class="chapter" id="section-4"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>ComfyUI · use Senzhi in a node workflow</h2><p>The API workspace offers a <strong>ComfyUI plug-in</strong> and its installation guide. A catalog workflow can feed the output of a text node into an image node as a photographic brief, then preview or save the resulting image. <a href="https://www.senzhiai.com/workspace.php?tool=open_api">Get the plug-in and setup instructions</a></p>
+<ol>
+<li>Extract the archive so that <code>ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/</code> contains <code>requirements.txt</code> directly.</li>
+<li>Use the Python environment that runs ComfyUI to install the requirements. From the directory containing <code>ComfyUI/</code>, for example, run <code>python -m pip install -r ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/requirements.txt</code>.</li>
+<li>Restart ComfyUI and refresh the browser. Search the canvas for <code>森智AI</code> or <code>NewAPI</code>. Configure the Senzhi service and your API key in the configuration node, choose an available model and connect the image, text or text preview nodes. Remove the key and inspect the exported JSON before sharing a workflow.</li>
+</ol>
+</section></article></div></div></main>
+<footer><div class="shell"><a href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/docs/api-en.md">Source on GitHub ↗</a></div></footer></body></html>

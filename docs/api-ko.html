@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Senzhi AI 개발 가이드 | API, 페이수 다차원 표, ComfyUI</title><meta name="description" content="상품 관리표에 등록한 SKU와 사진을 바탕으로 대표 이미지를 만들고 결과를 같은 행에 기록할 수 있습니다. 아래는 이미지 모델을 조회하고 흰 배경 상품 컷 한 장을 요청한 뒤 원본을 받는 과정입니다."><link rel="canonical" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html"><link rel="alternate" hreflang="zh-Hans" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html">
+<link rel="alternate" hreflang="en" href="https://iwkai312.github.io/Senzhi-AI/api-en.html">
+<link rel="alternate" hreflang="ja" href="https://iwkai312.github.io/Senzhi-AI/api-ja.html">
+<link rel="alternate" hreflang="ko" href="https://iwkai312.github.io/Senzhi-AI/api-ko.html">
+<link rel="alternate" hreflang="es" href="https://iwkai312.github.io/Senzhi-AI/api-es.html">
+<link rel="alternate" hreflang="x-default" href="https://iwkai312.github.io/Senzhi-AI/api-zh.html"><meta property="og:type" content="article"><meta property="og:title" content="Senzhi AI 개발 가이드 | API, 페이수 다차원 표, ComfyUI"><meta property="og:description" content="상품 관리표에 등록한 SKU와 사진을 바탕으로 대표 이미지를 만들고 결과를 같은 행에 기록할 수 있습니다. 아래는 이미지 모델을 조회하고 흰 배경 상품 컷 한 장을 요청한 뒤 원본을 받는 과정입니다."><meta property="og:url" content="https://iwkai312.github.io/Senzhi-AI/api-ko.html"><meta property="og:image" content="https://iwkai312.github.io/Senzhi-AI/assets/knit-studio.webp"><link rel="icon" href="assets/senzhi-logo.png"><link rel="stylesheet" href="assets/guide.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Senzhi AI 개발 가이드 | API, 페이수 다차원 표, ComfyUI","inLanguage":"ko","url":"https://iwkai312.github.io/Senzhi-AI/api-ko.html","description":"상품 관리표에 등록한 SKU와 사진을 바탕으로 대표 이미지를 만들고 결과를 같은 행에 기록할 수 있습니다. 아래는 이미지 모델을 조회하고 흰 배경 상품 컷 한 장을 요청한 뒤 원본을 받는 과정입니다.","publisher":{"@type":"Organization","name":"森智 AI · Senzhi AI","url":"https://www.senzhiai.com/"}}</script></head>
+<body><header><div class="shell mast"><a class="brand" href="https://www.senzhiai.com/"><img src="assets/senzhi-logo.png" width="32" height="32" alt="">森智 AI <span>/</span> Senzhi AI</a><nav class="languages" aria-label="언어 선택"><a lang="zh-Hans" hreflang="zh-Hans" href="api-zh.html">简体中文</a><a lang="en" hreflang="en" href="api-en.html">English</a><a lang="ja" hreflang="ja" href="api-ja.html">日本語</a><a lang="ko" hreflang="ko" href="api-ko.html" aria-current="page">한국어</a><a lang="es" hreflang="es" href="api-es.html">Español</a></nav></div></header>
+<main><div class="shell"><div class="hero api-hero"><div class="hero-copy"><div class="kind"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg>개발자 가이드</div><h1>Senzhi AI 개발 가이드 | API, 페이수 다차원 표, <span class="term">ComfyUI</span></h1><p>상품 관리표에 등록한 SKU와 사진을 바탕으로 대표 이미지를 만들고 결과를 같은 행에 기록할 수 있습니다. 아래는 이미지 모델을 조회하고 흰 배경 상품 컷 한 장을 요청한 뒤 원본을 받는 과정입니다.</p><div class="actions"><a class="primary" href="https://www.senzhiai.com/workspace.php?tool=open_api">API 키 발급 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="secondary" href="ko.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5c3.3-1.4 6.5-1.1 9 1.1 2.5-2.2 5.7-2.5 9-1.1v13.1c-3.2-1.3-6.3-.9-9 1.1-2.7-2-5.8-2.4-9-1.1zM12 6.6v13"/></svg>제품 가이드</a></div></div></div>
+<div class="layout"><aside><div class="toc"><strong><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M3 6h.1M3 12h.1M3 18h.1"/></svg>이 페이지의 내용</strong><a href="#section-1">1. 계정의 모델 목록 조회</a><a href="#section-2">2. 흰 배경 상품 컷 한 장 요청</a><a href="#section-3">3. 원래 작업 조회 및 원본 저장</a><a href="#section-4">이미지·텍스트·영상별 입력</a><a href="#section-5">페이수 다차원 표(Feishu Base) 자동화</a><a href="#section-6">ComfyUI에서 노드 연결</a></div><details><summary>이 페이지의 내용</summary><a href="#section-1">1. 계정의 모델 목록 조회</a><a href="#section-2">2. 흰 배경 상품 컷 한 장 요청</a><a href="#section-3">3. 원래 작업 조회 및 원본 저장</a><a href="#section-4">이미지·텍스트·영상별 입력</a><a href="#section-5">페이수 다차원 표(Feishu Base) 자동화</a><a href="#section-6">ComfyUI에서 노드 연결</a></details></aside><article><section class="chapter" id="section-1"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg></span>1. 계정의 모델 목록 조회</h2><p>작업 공간에 로그인해 API 메뉴에서 키를 만드세요. 아래 Bash와 curl 예제는 서버의 <code>SENZHI_API_KEY</code> 환경 변수에서 키를 읽습니다. 인증할 때는 <code>Authorization: Bearer &lt;key&gt;</code> 또는 <code>X-API-Key</code> 헤더를 사용합니다.</p>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  &#39;https://www.senzhiai.com/api/open_models.php?type=image&#39;
+</code></pre>
+<p><code>type</code>은 <code>image</code>, <code>text</code>, <code>video</code> 중 하나이며 생략하면 전체 목록을 조회합니다. 목록 조회는 무료입니다. <code>models</code> 배열에서 원하는 모델의 <code>pricing</code>과 <code>request_example</code>을 확인하세요. <code>model_id</code>에는 <code>db:123</code>처럼 Senzhi에서 발급한 식별자를 사용합니다. 이름으로 호출할 때는 <code>model_id</code> 대신 대소문자까지 정확히 일치하는 <code>model_name</code>을 사용하세요. 이름이 겹쳐 <code>409 AMBIGUOUS_MODEL</code>이 반환되면 모델 ID를 지정합니다.</p>
+</section>
+<section class="chapter" id="section-2"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>2. 흰 배경 상품 컷 한 장 요청</h2><p>아래 JSON을 <code>request.json</code>으로 저장하고 예시 이미지 URL을 자신의 상품 사진 주소로 바꾸세요. Senzhi가 접근할 수 있는 HTTPS 이미지 직접 링크를 사용합니다. <code>images</code> 배열 순서가 프롬프트의 ‘이미지 1’, ‘이미지 2’에 해당합니다. 모델을 바꿀 때는 그 모델의 <code>request_example</code>에 있는 필수 옵션을 함께 사용하세요.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;nano-banana-pro&quot;,
+  &quot;prompt&quot;: &quot;이미지 1에 있는 크림색 카디건의 정면 흰 배경 상품 사진을 만들어 주세요. 옷깃, 단추, 소매 끝의 골지 짜임을 살려 주세요.&quot;,
+  &quot;images&quot;: [
+    &quot;https://example.com/products/knit-01.jpg&quot;
+  ],
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-white-v1&quot;
+}
+</code></pre>
+<pre><code class="language-bash">curl --silent --show-error \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  -H &#39;Content-Type: application/json&#39; \
+  --data-binary @request.json \
+  &#39;https://www.senzhiai.com/api/open_generate.php&#39;
+</code></pre>
+<p>요청 하나가 작업 한 건을 만들며 <code>n</code>은 1입니다. 예시 응답 <code>{&quot;success&quot;:true,&quot;request_id&quot;:&quot;req_example&quot;,&quot;status&quot;:&quot;queued&quot;}</code>에서 <code>request_id</code>를 저장하세요. 새 작업에는 새로운 <code>idempotency_key</code>를 부여합니다. 작업 ID를 받기 전에 연결이 끊기면 <strong>같은 API 키, 같은 멱등 키, 같은 요청 본문</strong>으로 다시 보내 기존에 접수된 작업을 찾습니다.</p>
+</section>
+<section class="chapter" id="section-3"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span>3. 원래 작업 조회 및 원본 저장</h2><p><code>req_example</code>을 직전에 받은 ID로 바꾸고 작업을 제출한 API 키로 조회합니다.</p>
+<pre><code class="language-bash">curl --silent --show-error --get \
+  -H &quot;Authorization: Bearer $SENZHI_API_KEY&quot; \
+  --data-urlencode &#39;request_id=req_example&#39; \
+  &#39;https://www.senzhiai.com/api/open_result.php&#39;
+</code></pre>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>JSON의 <code>status</code></th>
+<th>처리 방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code> / <code>queued</code> / <code>processing</code></td>
+<td>5~10초 뒤 다시 조회합니다. <code>Retry-After</code> 또는 <code>retry_after</code>가 있으면 해당 대기 시간을 따릅니다.</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>이미지·영상은 <code>result.url</code>, 텍스트는 <code>result.content</code>를 읽습니다. 파일 URL의 쿼리 문자열을 보존해 원본을 내려받으세요.</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td><code>error.code</code>와 <code>error.message</code>를 저장하고 원인을 확인합니다.</td>
+</tr>
+</tbody></table></div>
+<p>조회가 시간 초과되거나 <code>503 MEDIA_UNAVAILABLE</code>가 반환되면 기존 ID로 계속 조회하세요. <code>410 MEDIA_EXPIRED</code>는 결과 보관 기간이 끝났다는 의미입니다. 파일을 내려받을 때는 <code>result.url</code>만 사용하고, Senzhi API 키는 Senzhi API 도메인에만 전송하세요.</p>
+</section>
+<section class="chapter" id="section-4"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4zm0 0v10l9 4 9-4V7M12 11v10"/></svg></span>이미지·텍스트·영상별 입력</h2><ul>
+<li><strong>이미지</strong>는 <code>parameter_combinations</code>와 <code>parameters</code>에서 해상도, 비율, 품질, 포맷의 가능한 조합을 확인합니다. 4K가 필요하면 모델이 해당 조합을 제공하는지 확인하세요.</li>
+<li><strong>텍스트</strong>는 <code>prompt</code>에 검증된 제품 정보, 작성 언어, 분량을 넣습니다. <code>system_prompt</code>로 브랜드 문체를 지정할 수 있습니다. 참고 이미지는 모델의 입력 지원 여부와 허용 장수를 확인한 뒤 추가하세요.</li>
+<li><strong>영상</strong>은 계정의 <code>type=video</code> 목록에 모델이 표시될 때 호출할 수 있습니다. 2026년 11월 6일 확인한 API 목록에는 영상 모델이 없었으며, MiniMax H3와 Agnes Video 2.5는 웹 작업 공간에서 제공됐습니다. API 영상 모델을 사용할 때는 <code>video_capabilities</code>에서 길이, 해상도, 참고 이미지를 확인하고 예제의 <code>options.pricing_version</code>을 유지하세요. 선택한 해상도의 초당 가격과 길이로 비용을 계산합니다.</li>
+</ul>
+<h3>해외 상품 페이지에 넣을 영문 문구 작성</h3>
+<p>다음 본문을 <code>request.json</code>으로 저장하고 이미지 예제의 POST와 조회 명령을 그대로 사용하세요. 새 작업마다 전용 <code>idempotency_key</code>로 바꾸고, 같은 요청을 재전송할 때는 원래 값을 유지하세요. 상태가 <code>success</code>가 되면 <code>result.content</code>에서 영문 문구를 읽습니다.</p>
+<pre><code class="language-json">{
+  &quot;model_name&quot;: &quot;gpt-6.1-sol&quot;,
+  &quot;prompt&quot;: &quot;영어로 상품 소개 문장 하나를 20단어 이내로 작성해 주세요. 확인된 사실은 크림색 니트 카디건이며 앞면에 단추가 네 개 있다는 것입니다. 이 사실만 사용하세요.&quot;,
+  &quot;idempotency_key&quot;: &quot;catalog-knit-01-copy-en-v1&quot;
+}
+</code></pre>
+<h3>API 모델 표시 이름 (2026년 11월 6일 확인)</h3>
+<p><code>model_name</code>에는 대소문자, 띄어쓰기, 괄호를 포함하여 표시 이름을 그대로 입력하세요. 제출 전에는 내 계정의 최신 목록을 확인하세요.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>유형</th>
+<th>목록의 표시 이름</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>이미지</td>
+<td><code>nano-banana-pro</code> · <code>nano-banana-pro-vip（谷歌官方）</code> · <code>Nano Banana Pro【VIP】</code></td>
+</tr>
+<tr>
+<td>이미지</td>
+<td><code>nano-banana-2</code> · <code>nano-banana-2.1</code> · <code>Nano-banana-2.1【VIP】</code></td>
+</tr>
+<tr>
+<td>이미지</td>
+<td><code>GPT-image-2.5-sunburst【VIP】</code> · <code>GPT-image-2.5-flare【VIP】</code> · <code>GPT Image 2.0【VIP】</code></td>
+</tr>
+<tr>
+<td>텍스트</td>
+<td><code>gpt-6.1-sol</code> · <code>gemini-3.8-flash</code> · <code>gemini3.1-flash</code></td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="chapter" id="section-5"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>페이수 다차원 표(Feishu Base) 자동화</h2><ol>
+<li>SKU, 참고 이미지 URL, 지시문, 버전, 모델, 상태, 작업 ID, 결과 열을 만드세요. 첨부 파일에 페이수 로그인이 필요하면 권한 있는 서비스에서 가져온 직접 링크를 쓰고 생성 시간보다 넉넉한 유효 기간을 확보합니다.</li>
+<li>‘제작 승인’이고 작업 ID가 빈 행만 자동화 대상으로 설정하세요. ‘发送 HTTP 请求’(HTTP 요청 보내기)로 위 POST를 보내고, 행 ID·작업 용도·버전으로 고정된 <code>idempotency_key</code>를 만듭니다. <code>request_id</code>를 해당 행에 기록합니다. API 키는 권한이 제한된 자동화나 자체 서버에서 관리하세요.</li>
+<li>별도 예약 작업에서 ID가 있는 미완료 행을 조회합니다. GET의 <code>request_id</code> 쿼리 항목에 기록한 ID를 전달하고 성공 시 <code>result.url</code>이나 <code>result.content</code>를 같은 행에 적습니다. 장기 보관할 파일은 팀의 자료실로 복사하세요.</li>
+</ol>
+</section>
+<section class="chapter" id="section-6"><h2><span class="chapter-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 7-5 5 5 5m9-10 5 5-5 5m-3.6-13-3 16"/></svg></span>ComfyUI에서 노드 연결</h2><p>작업 공간의 API 메뉴에서 플러그인을 받은 뒤 <code>ComfyUI/custom_nodes/ComfyUI-NewAPI-Bridge/</code> 바로 아래에 <code>requirements.txt</code>가 있도록 압축을 풉니다. ComfyUI가 사용하는 Python 환경에서 해당 패키지를 설치하고 ComfyUI를 재시작한 뒤 브라우저를 새로 고치세요. ‘森智AI’나 ‘NewAPI’를 검색해 설정 노드에 접속 정보를 입력하고 이미지, 텍스트, 텍스트 미리보기 노드를 연결합니다. 워크플로를 공유하기 전 키를 지우고 내보낸 JSON도 확인하세요. <a href="https://www.senzhiai.com/workspace.php?tool=open_api">플러그인 및 설치 안내</a></p>
+</section></article></div></div></main>
+<footer><div class="shell"><a href="https://www.senzhiai.com/">森智 AI · Senzhi AI</a><a href="https://github.com/iwkai312/Senzhi-AI/blob/main/docs/api-ko.md">GitHub 원문 ↗</a></div></footer></body></html>
