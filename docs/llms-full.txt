@@ -1,0 +1,112 @@
+# Senzhi AI (森智 AI)
+
+## [简体中文 — 森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图](https://iwkai312.github.io/Senzhi-AI/)
+
+森智 AI 是面向电商卖家、品牌美工和内容团队的 AI 视觉创作工作台。手里有商品白底图和模特参考图，就可以先看看一件衣服穿在不同模特身上的效果，再挑选适合商品页的图。上新款式多时，还可以把整批素材配对，一次提交多个任务。
+
+[访问森智 AI 官网](https://www.senzhiai.com/) · [进入工作台](https://www.senzhiai.com/workspace.php)
+
+### 从商品素材到上架图片
+
+- **服装虚拟试穿与商品替换**。上传商品图和参考图，在提示词里指定要换哪件衣服，以及要保留的姿势、背景或构图。生成后可放大检查领口、纹理和花色，再决定采用哪一张。
+- **白底图、细节图与场景图**。为同一款产品准备不同用途的图片。白底图用于展示商品外形，细节图突出袖口或面料，生活场景图展示搭配与使用情境。
+- **详情页与图文内容**。选用参考版式制作商品详情图，也可以围绕同一款商品继续创作小红书图文或生成视频素材。
+
+### 实例：3 款针织衫，分别搭配 10 张模特图
+
+1. 在工作台打开「批量生图」，选择支持至少两张参考图的模型。将 3 张商品图放在第一列，10 张模特图放在第二列。
+2. 选择「全部组合」，预览会列出 **3 × 10 = 30 组**。如果已经按拍摄清单做好了一一配对，选择按顺序配对即可。如果每组都要用同一张背景图，可在模型允许的参考图数量内添加固定图片列。
+3. 写一段共用要求，例如「把图 1 的针织衫换到图 2 的模特身上，保留模特姿势和背景，注意领口与袖口的花纹」。需要分别照顾每组素材时，可开启「逐组自动优化提示词」。
+4. 核对组数和预计积分后提交。生成完成后，可以在批次里挑选结果，也可以到「资产中心 → 图片空间」按功能筛选，勾选需要的原图打包下载。
+
+### 开发者接入
+
+在工作台的「API 接口调用」中创建 API Key，使用 `GET /api/open_models.php` 查询当前账号可调用的模型、参数和计费信息。接入支持图片、文字和视频三类任务，可选模型以账号返回的列表为准。提交任务时可以使用本站模型编号或完整展示名称。
+
+第一次使用可以先以访客身份浏览工作台，看看配图方式与创作工具。登录后即可提交任务，提交前可在页面核对预计积分。[打开工作台](https://www.senzhiai.com/workspace.php)
+
+---
+
+## [English — Senzhi AI (森智 AI) for e-commerce product photography](https://iwkai312.github.io/Senzhi-AI/en.html)
+
+Senzhi AI is a workspace for creating product images from your own photos. A clothing store can start with a flat-lay photo of a cardigan, preview it on different models with virtual try-on, and prepare images for a product listing. For other products, use a reference photo to replace an item in a scene, create a white-background image, or draw attention to details such as a clasp or a stitched seam.
+
+### Turn a folder of photos into a batch
+
+Suppose you want to see three cardigans on two models. Put the three garment photos in one source column and the two model photos in another. Choose **All combinations** to create six groups, one for each garment and model pairing. Preview the groups before submitting. A shared prompt such as “Dress the model in image 2 in the cardigan from image 1 and keep the pose” tells the tool how to use each photo.
+
+For a shoot where each garment already has an assigned model photo, choose **Pair in order**. Arrange both columns so the photos on each row belong together. To use the same reference in every group, add it as a fixed image. In this mode, several fixed images rotate through the groups. You can also enable prompt optimization to adapt the shared instruction to the references in each group.
+
+### Review, download, or integrate
+
+Open the image library to review recent results, select the shots you want, and download the originals together as a ZIP file.
+
+For an integration, the API supports image, text, and video tasks. Use your account’s model list to see which models you can call and which parameters each accepts.
+
+Guests can browse the workspace. Sign in to submit a task and check its estimated credit cost. [Visit Senzhi AI](https://www.senzhiai.com/) · [Open the workspace](https://www.senzhiai.com/workspace.php)
+
+---
+
+## [日本語 — 森智 AI (Senzhi AI)｜EC向けの商品画像・着用イメージ制作](https://iwkai312.github.io/Senzhi-AI/ja.html)
+
+森智 AI は、ネットショップの商品担当者や制作チームが、手元の商品写真をもとに白背景の商品画像、ディテールカット、モデルの着用イメージを作れるサービスです。同じ商品を複数のモデルや背景で見比べたいときは、写真の組み合わせをまとめて指定できます。[公式サイト](https://www.senzhiai.com/)
+
+### 新作ニットの着用イメージを作る
+
+1. ワークスペースで「批量生图」（画像の一括生成）を開きます。素材の1列目にニット3点の商品写真、2列目にモデル10人の写真を並べます。
+2. 「全部组合」（すべての組み合わせ）を選ぶと、ニット1点につき10人、合計30組ができます。共通の指示には、たとえば「画像1のニットを画像2の人物に着せ、襟と編み目の特徴を保つ」と入力します。必要に応じて「逐组自动优化提示词」を有効にすると、各組の写真に合わせて指示文を調整できます。
+3. 組み合わせと見積もりポイントを確認して生成を開始します。できあがった画像を実物の写真と見比べ、色や柄が意図どおりに表現されたカットを選びます。
+
+商品ごとにモデルが決まっている場合は、「按顺序配对」（順番に組み合わせる）を選びます。各列の1枚目同士、2枚目同士がそれぞれ1組になります。同じ背景をすべての組に使うには、「固定图片」（固定画像）の列に背景を1枚入れます。順番に組み合わせるモードで固定画像を複数入れると、並び順に繰り返し使われます。
+
+### 商品ページへの活用
+
+- **着用イメージと商品差し替え**：商品写真と参考写真を組み合わせて、服の着用例や商品を入れ替えた構図を試せます。
+- **白背景とディテール**：商品一覧には白背景の画像を、詳細ページには袖口の編み目やボタンに焦点を当てたカットを用意できます。
+- **ダウンロード**：「图片空间」（画像スペース）から元のサイズの画像を保存できます。複数のカットを選んで ZIP にまとめることもできます。
+- **API連携**：自社ツールから画像・テキスト・動画の生成を呼び出せます。利用できるモデルと指定可能なパラメーターは、アカウントの API キーで取得したモデル一覧で確認できます。
+
+ゲストでもワークスペースを閲覧できます。生成する際はログインし、使うモデルと必要なポイントを確認してください。[ワークスペースを開く](https://www.senzhiai.com/workspace.php)
+
+---
+
+## [한국어 — 森智 AI (Senzhi AI) | 온라인 쇼핑몰을 위한 AI 상품 이미지 제작](https://iwkai312.github.io/Senzhi-AI/ko.html)
+
+森智 AI는 쇼핑몰 판매자와 콘텐츠 제작팀이 상품 사진으로 흰 배경 이미지, 디테일 컷, 가상 착용 이미지를 만들 수 있는 서비스입니다. 신상품 하나를 여러 모델이나 배경에 적용해 보고 싶다면 사진을 폴더별로 준비한 뒤 작업 공간에서 한꺼번에 조합할 수 있습니다. [공식 사이트](https://www.senzhiai.com/)
+
+### 니트 3종으로 착용 이미지 30장 만들기
+
+1. 작업 공간에서 ‘批量生图’(이미지 일괄 생성)를 엽니다. 첫 번째 열에는 니트 상품 사진 3장을, 두 번째 열에는 모델 사진 10장을 넣습니다.
+2. ‘全部组合’(모든 조합)을 선택하면 니트 한 벌에 모델 10명씩, 총 30개 조합이 만들어집니다. 공통 프롬프트에 “2번 사진의 모델에게 1번 사진의 니트를 입히고, 옷깃 형태와 짜임을 살려 주세요”처럼 원하는 결과를 적습니다. 조합별로 지시문을 다듬으려면 ‘逐组自动优化提示词’(조합별 프롬프트 최적화)를 켭니다.
+3. 사진 조합과 예상 포인트를 확인한 뒤 생성을 시작합니다. 완성된 착용 예시를 원본 상품 사진과 비교해 색상과 무늬가 잘 표현된 컷을 고릅니다.
+
+상품마다 사용할 모델이 정해져 있으면 ‘按顺序配对’(순서대로 짝짓기)를 선택하세요. 각 열의 첫 번째 사진끼리, 두 번째 사진끼리 한 조가 됩니다. 모든 조에 같은 배경을 쓰려면 ‘固定图片’(고정 이미지) 열에 배경 사진 한 장을 넣으세요. 순서대로 짝짓기에서 고정 이미지를 여러 장 넣으면 등록한 순서대로 돌아가며 사용합니다.
+
+### 상품 페이지에 활용하는 방법
+
+- **가상 착용과 상품 교체** — 상품 사진과 참고 사진을 함께 사용해 모델 착용 예시를 만들거나, 기존 구도에 다른 상품을 배치해 볼 수 있습니다.
+- **흰 배경 이미지와 디테일 컷** — 상품 목록에는 흰 배경 이미지를, 상세 페이지에는 소매의 짜임이나 단추처럼 고객이 살펴볼 부분을 강조한 컷을 사용할 수 있습니다.
+- **원본 다운로드** — ‘图片空间’(이미지 보관함)에서 원본 크기로 내려받을 수 있습니다. 원하는 컷만 고르거나 필터링한 결과를 모두 선택해 ZIP 파일로 받을 수도 있습니다.
+- **API 연동** — 자체 도구에서 이미지, 텍스트, 동영상 생성 기능을 호출할 수 있습니다. 계정에서 사용할 수 있는 모델과 입력 옵션은 해당 계정의 API 키로 모델 목록을 조회해 확인하세요.
+
+작업 공간은 게스트로 둘러볼 수 있습니다. 생성을 시작하려면 로그인한 뒤 모델과 필요한 포인트를 확인하세요. [작업 공간 열기](https://www.senzhiai.com/workspace.php)
+
+---
+
+## [Español — Senzhi AI (森智 AI) para fotografía de producto y comercio electrónico](https://iwkai312.github.io/Senzhi-AI/es.html)
+
+Senzhi AI permite a las tiendas y a sus equipos creativos preparar imágenes de catálogo a partir de sus propias fotos. Con el probador virtual puedes ver cómo quedaría una chaqueta de punto en distintas fotos de modelos. También puedes sustituir el producto que aparece en una escena, crear una imagen con fondo blanco o preparar un primer plano de un detalle como un cierre o una costura.
+
+### Crea las variantes de una colección
+
+Imagina que tienes fotos de tres chaquetas y de dos modelos. Añade las prendas a la primera columna y las fotos de las modelos a la segunda. Con **Todas las combinaciones** obtendrás seis grupos, uno por cada pareja de prenda y modelo. Revisa la vista previa y escribe una instrucción común, por ejemplo «Viste a la modelo de la imagen 2 con la chaqueta de la imagen 1 y conserva la pose».
+
+Si ya has elegido una foto de modelo para cada prenda, usa el **emparejamiento por orden**. Ajusta el orden hasta que cada fila contenga las dos fotos que quieras combinar. También puedes añadir una imagen fija que se repita en todo el lote, por ejemplo la referencia de un mismo fondo. En este modo, si añades varias imágenes fijas a la misma columna, se alternarán siguiendo su orden. La optimización opcional de instrucciones adapta el texto común a las imágenes de cada grupo.
+
+### Descarga las imágenes o conecta tu aplicación
+
+En la biblioteca de imágenes puedes revisar los resultados recientes, marcar las tomas que quieras usar y descargar los originales en un archivo ZIP.
+
+La API admite tareas de imagen, texto y vídeo. Consulta la lista de modelos de tu cuenta para ver cuáles tienes disponibles y qué parámetros acepta cada uno.
+
+Puedes explorar el espacio de trabajo como visitante. Inicia sesión para consultar el coste estimado en créditos y enviar una tarea. [Visitar Senzhi AI](https://www.senzhiai.com/) · [Abrir el espacio de trabajo](https://www.senzhiai.com/workspace.php)

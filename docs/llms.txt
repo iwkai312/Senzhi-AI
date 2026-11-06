@@ -1,0 +1,18 @@
+# Senzhi AI (森智 AI)
+
+> Senzhi AI is a workspace for creating product images from your own photos.
+
+[Full text of all five language editions](https://iwkai312.github.io/Senzhi-AI/llms-full.txt)
+
+## Product guides
+
+- [简体中文 — 森智 AI（Senzhi AI）｜电商商品图、虚拟试穿与批量生图](https://iwkai312.github.io/Senzhi-AI/) · [Markdown](https://raw.githubusercontent.com/iwkai312/Senzhi-AI/main/README.md)
+- [English — Senzhi AI (森智 AI) for e-commerce product photography](https://iwkai312.github.io/Senzhi-AI/en.html) · [Markdown](https://raw.githubusercontent.com/iwkai312/Senzhi-AI/main/docs/en.md)
+- [日本語 — 森智 AI (Senzhi AI)｜EC向けの商品画像・着用イメージ制作](https://iwkai312.github.io/Senzhi-AI/ja.html) · [Markdown](https://raw.githubusercontent.com/iwkai312/Senzhi-AI/main/docs/ja.md)
+- [한국어 — 森智 AI (Senzhi AI) | 온라인 쇼핑몰을 위한 AI 상품 이미지 제작](https://iwkai312.github.io/Senzhi-AI/ko.html) · [Markdown](https://raw.githubusercontent.com/iwkai312/Senzhi-AI/main/docs/ko.md)
+- [Español — Senzhi AI (森智 AI) para fotografía de producto y comercio electrónico](https://iwkai312.github.io/Senzhi-AI/es.html) · [Markdown](https://raw.githubusercontent.com/iwkai312/Senzhi-AI/main/docs/es.md)
+
+## Website
+
+- [Senzhi AI](https://www.senzhiai.com/)
+- [Workspace](https://www.senzhiai.com/workspace.php)
